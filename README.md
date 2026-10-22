@@ -175,7 +175,7 @@ The latest milestones:
 
 - **2026-09-30** — Enough small releases had piled up that a layered structure had formed on its own. The rebuild of the complete trading-cognition system began, following that naturally-formed layering rather than a diagram drawn in advance.
 - **2026-10-07** — The name "Apex Quant," suggested by Gemini when all I could say was "I want to do LLM quant," no longer fit a project that had grown a style of its own. The real name was settled: **Equipoise（均势）** — balance under hard contention. The rename itself waited until everything could change at once.
-- **2026-10-17** — Everything changes at once: the working repo becomes `equipoise`, this mirror `equipoise_open`, the dashboard *Equipoise Dash*. The same day v3.2 goes live. The chart above still carries the old heading — one more easter egg.
+- **2026-10-17** — Everything changes at once: the working repo becomes `equipoise`, this mirror `equipoise_open`, the dashboard *Equipoise Dash*. The same day v3.2 goes live.
 
 ![timeline](images/timeline-v2.png)
 
@@ -360,7 +360,7 @@ BP = **反向传播**：辩论是前向推理，后验是对真实标签算误�
 
 - **2026-09-30** —— 小版本更新积累下来，一个分层的结构已经自然形成。于是开始按照这个自然形成的分层，完整重构整套交易认知体系。
 - **2026-10-07** —— 当初跟 Gemini 3 说"要做 LLM 的量化"时还没做出自己的风格，它起的 "Apex Quant" 已经不像这套系统真正的样子。正式名字定下：**Equipoise（均势）**——激烈交锋之下的均衡。改名本身等到所有地方能一起换的那天。
-- **2026-10-17** —— 所有地方一起换：工作仓库改名 `equipoise`，这个镜像改名 `equipoise_open`，看板改名 *Equipoise Dash*。同一天 v3.2 上线。上面这张图的标题还是旧名——又一个彩蛋。
+- **2026-10-17** —— 所有地方一起换：工作仓库改名 `equipoise`，这个镜像改名 `equipoise_open`，看板改名 *Equipoise Dash*。同一天 v3.2 上线。
 
 ![timeline](images/timeline-v2.png)
 
