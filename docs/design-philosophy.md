@@ -1,6 +1,6 @@
 **English** | [**中文**](#中文版)
 
-# Apex Quant — Field Notes from a Quant-Debate Framework
+# Equipoise — Field Notes from a Quant-Debate Framework
 
 > Not a technical doc — a condensed pitfall diary.
 > The one-line thesis: **talking isn't doing.**
@@ -17,7 +17,9 @@ Two advocates argue on stage: the bull **Zealot** and the profit-taking **Reaper
 
 In October 2025 I had a hunch the market would drop, but I couldn't read it well myself and couldn't be bothered to chew through the data — so I figured I'd cobble together an agent to watch it for me. I thought it'd be simple: dump the data and news on the AI, and surely its analysis wouldn't go off the rails — I even had it work out an options play while it was at it. Actually building it, reality turned out absurdly more complicated; to this day I'm still polishing the most basic thing of all — getting it to truly *understand* a single stock.
 
-A quick aside on the name: "Apex Quant" came from Gemini — I described the idea and asked it to name the thing; it offered a few, and I picked this one. From there I kept the naming rule as a series: the frontend is **apex dash** (dashboard), the original Claude Code parallel version was **apex codex**, and this repo is **apex parliament** — the plain `apex-quant` name was already taken by my own private (beta / working) repo, so the open-source mirror needed its own; "parliament" turned out to fit anyway — a chamber of AIs arguing their way to a vote is exactly that.
+A word on the name. The system began life as **Apex Quant** — a name I had Gemini pick when I first started turning the idea over; it offered a few, I chose this one, and it grew into a series: the frontend **apex dash** (dashboard), the original Claude Code parallel version **apex codex**, the open-source mirror **apex parliament** — `apex-quant` was taken by my own private repo, so the mirror needed its own, and it fit anyway: a chamber of AIs arguing their way to a vote is exactly that.
+
+But "Apex" was always a first-week stopgap, and after a year it looked less and less like what this system actually is. On 7 October 2026, together with Fable, I settled the real name: **Equipoise（均势）** — balance under hard contention. Looking back down the road — the adversarial debaters, the damper, the ledger, the staked pricing, the burden-of-proof curve — every mechanism, screwed together, was reaching for that one thing. The moment the name fit felt like the system had finally grown into something worth being named.
 
 ## 🗣️ Talking ≠ doing
 
@@ -218,6 +220,12 @@ This round I had Claude and Codex in consultation at the same time, tearing the 
 
 World models seem to be walking the same road. When GPT-4 came out, LeCun was already saying language alone isn't enough, that you need a world model — the direction was right, but the real world is far too complex for anyone to draw a complete, correct architecture top-down in one stroke. It's only now — with reasoning, image and video, VLA, robotics and spatial intelligence each breaking through bit by bit, the capabilities assembling piece by piece — that what a complete world model should look like is starting to come into view; Fei-Fei Li's team working on spatial intelligence seems to be moving along that same road. A tiny trading framework and a vast field running into the same regularity is probably not a coincidence.
 
+## 🗜️ It keeps getting better at doing — and is nearly losing the ability to talk
+
+Reading the ancient debate archives — around March, back in the three-debater days — is like reading a different system: wall-to-wall natural language, with mood and qualitative judgment — "I'm worried about valuation," "clearly weakening" — two people having an argument. Then came the long march of quantification: the measuring scale, the ledger, staked pricing, tasks — and today's debate is dense quantitative prose, every sentence carrying an ID, an anchor and a threshold. Rigorous, genuinely; and genuinely exhausting to read — never mind the body, even the summary has to be decoded word by word. The road from fuzzy talk to dependable computation wasn't the wrong road; it's just that at the end of it I found I had swapped out "a human can read it" along the way.
+
+So I'm considering adding a plain-language passage to the report. The difficulty sits at both ends: a sentence or two of summary can no longer hold the information a debate now carries, while the full body is too dense to serve as reading material — there's a missing layer in between. If it goes in, one boundary has to be held absolutely: that passage may only *translate*, never *compose* — the moment it starts improvising, the bare rhetoric that staked pricing finally drove out comes back in through the back door. Undecided; noted here. The opening line of these notes was "talking isn't doing." A year on, it does better and better — and can nearly no longer talk.
+
 ---
 
 Questions and discussion welcome: **sst19910323@gmail.com**
@@ -228,7 +236,7 @@ Questions and discussion welcome: **sst19910323@gmail.com**
 
 [**English**](#english--中文) | **中文**
 
-# Apex Quant 趣闻 · 一个量化辩论框架的踩坑笔记
+# Equipoise 趣闻 · 一个量化辩论框架的踩坑笔记
 
 > 不是技术文档，是一份踩坑笔记的精简版。
 > 一句话总纲：**会说，不等于会做。**
@@ -245,7 +253,9 @@ Questions and discussion welcome: **sst19910323@gmail.com**
 
 2025 年 10 月，我觉得大盘要跌，可自己看不准、又懒得啃数据，就想搓个 agent 替我盯着。当时想得特别简单：把数据和新闻一股脑喂给 AI，它分析完总不至于出岔子吧——我甚至顺手让它把期权方案也一块算了。真做下去才发现现实复杂得离谱；直到今天，我都还在打磨它"看懂一只股票"这件最基本的事。
 
-顺带说个名字的趣事：Apex Quant 这名字是 Gemini 取的——我把想法讲给它、让它起名，它给了几个候选，我挑了这个。后来干脆把这条命名规则延续成了一个系列：前端叫 **apex dash**（dashboard），当初那个 Claude Code 平行版叫 **apex codex**，而这个仓库之所以叫 **apex parliament**（议会）：`apex-quant` 这名字被我自己的私有仓库（beta / 在用版）占了，开源镜像只好另起一个——而"议会"这名字恰好还贴切：一屋子 AI 吵架、投票表决，可不就是个议会嘛。
+顺带说说名字的故事。这套系统最早叫 **Apex Quant**——我刚开始寻思这个 idea 时让 Gemini 起的，它给了几个候选、我挑了这个，后来还衍生成一个系列：前端叫 **apex dash**（dashboard），当初那个 Claude Code 平行版叫 **apex codex**，开源镜像叫 **apex parliament**（议会）——`apex-quant` 被我自己的私有仓库占了名只好另起，倒也贴切：一屋子 AI 吵架、投票表决，可不就是个议会嘛。
+
+可"Apex"终究是起步时的凑合，叫了一年，越看越不像这套系统真正的样子。2026 年 10 月 7 日，和 Fable 一起把正式名字定了下来：**Equipoise（均势）**——激烈交锋之下的均衡。回头看这一路：辩手对抗、阻尼器、记账、挂牌、举证曲线……所有机制拧在一起，求的其实就是这一件事。名字到位的那一刻，倒像是系统终于长到了配得上它的样子。
 
 ## 🗣️ 会说 ≠ 会做
 
@@ -445,6 +455,12 @@ MU 那一期是个标本：它把整条往返路径几乎按数字喊了出来�
 这次同时开着 Claude 和 Codex 会诊、把整套 AI 推倒重构，越搞越觉得这个过程眼熟。一开始根本不知道最终该长什么样：今天搞 ensemble，明天设计角色立场，后天把 evidence 和 task 拆成两层，再后来连技能都分出了理论和执行——没有谁规划过这张图，它是**自发长成的**：层次分明，但粗糙。可偏偏要到这一步，顶层设计才第一次成为可能——对着雏形看它还缺什么、哪里粗糙、哪里冗余，再动手重新拆分与合并。顺序不能反：**不是设计产生了系统，是系统先长出来，才配得上被设计。**
 
 世界模型好像也在走同一条路。GPT-4 刚出来时 LeCun 就说光靠语言不够、必须有世界模型——方向没错，可真实世界复杂到不可能靠顶层设计一步拍出完整正确的架构。反而是现在：推理、图像视频、VLA、机器人、空间智能各自一点点突破，能力一块块拼起来之后，一个完整的世界模型该长什么样才开始看得清——李飞飞团队做 spatial intelligence，感觉也是沿着这条路在往前走。一个小小的交易框架和一个大领域撞上同一条规律，大概不是巧合。
+
+## 🗜️ 它越来越会做，却快不会说了
+
+翻上古版本的辩论存档——三月前后、还是三元阵容那会儿——像在读另一个系统：满篇自然语言，带情绪、带定性，"我担心估值"、"明显转弱"，活脱两个人在吵架。后来一路计量化：刻度尺、记账、挂牌、task，到今天的辩论已经是高密度定量——句句带编号、锚点和阈值，严谨是真严谨，可读着也是真累：别说正文，连 summary 都得逐字解码。把模糊话术换成可靠计算的那条路没有走错，只是走到头才发现，顺手把"人能读"也换掉了。
+
+于是在考虑给报告补一个"说人话"的段落。难处在两头：一两句概述已经装不下现在一场辩论的信息量，可整篇正文又密得没法当阅读材料——中间缺一层。真要加，有条边界得守死：这一段只许翻译、不许再创作——它要是开始自己发挥，当年好不容易用挂牌定价赶走的裸修辞，就从后门溜回来了。还没定，先记在这。开篇那句总纲是"会说，不等于会做"；一年下来，它倒是越来越会做，却快不会说了。
 
 ---
 

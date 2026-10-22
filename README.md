@@ -1,24 +1,25 @@
 **English** | [**中文**](#中文版)
 
-> ⚠️ **Temporary home.** My original GitHub account [`sst19910323`](https://github.com/sst19910323) was compromised and is currently suspended by the platform; an appeal to recover it is in progress. Until it's back, this project is temporarily synced here on my backup account. This repo and the original [`sst19910323/apex_parliament`](https://github.com/sst19910323/apex_parliament) are **the same project** — same content, same history, same author.
+<p align="center"><img src="images/equipoise-logo.png" alt="Equipoise 均势" width="420"></p>
 
-# ⚖️ Apex Quant
+# ⚖️ Equipoise（均势）
 
 ### Adversarial Multi-Agent Debate Framework for Quantitative Analysis
 
 [![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
-[![Paper](https://img.shields.io/badge/Paper-SSRN%206354961-blue)](https://papers.ssrn.com/abstract=6354961)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/)
+
+> **Formerly Apex Quant.** On 2026-10-17 the project took its real name — **Equipoise**, balance under hard contention — and this public mirror became `equipoise_open`. The old name, the old address and the old paper are kept as [easter eggs](#easter-eggs) at the bottom.
 
 ---
 
-Apex Quant is an LLM-based multi-agent framework for quantitative analysis. Before any decision is emitted, agents holding **opposing stances** must complete a structured debate. Most multi-agent trading frameworks split agents by **data type** (fundamentals, sentiment, technicals); Apex Quant splits them by **stance**. The framework is market-agnostic; the current implementation covers US / EU / JP / KR equities.
+Equipoise is an LLM-based multi-agent framework for quantitative analysis. Before any decision is emitted, agents holding **opposing stances** must complete a structured debate. Most multi-agent trading frameworks split agents by **data type** (fundamentals, sentiment, technicals); Equipoise splits them by **stance**. The framework is market-agnostic; the current implementation covers US / EU / JP / KR equities.
 
-> **🚧 October 2026 — a turning point.** The v2 line ran its last production batch on **2026-09-29**. The next day a ground-up **v3.0 rebuild** began — rules, orchestration and naming all redone under one top-level design — and its first end-to-end debate passed on **2026-10-01**. Details in [the v3.0 section](#v3-rebuild) just below.
+> **🚧 October 2026 — a turning point.** The v2 line ran its last production batch on **2026-09-29**. The next day a ground-up **v3.0 rebuild** began — rules, orchestration and naming all redone under one top-level design. It went into production on **2026-10-02**, followed by v3.1 (10-08) and v3.2 (10-17); and on **2026-10-17** the project took its real name, **Equipoise**. Details in [the v3.0 section](#v3-rebuild) just below.
 >
-> **Code is coming.** Until now this repo has open-sourced only the **thinking** — the design philosophy and this README — because v2 changed every week and its code was never in a state worth freezing. v3.0 is being built to be publishable: one rule tree, one orchestration protocol shared by both engines. Once it is cut over to production, a scrubbed release of the code lands here. Until then the runnable reference code is the archived **v1**.
+> **Code is coming.** Until now this repo has open-sourced only the **thinking** — the design philosophy and this README — because v2 changed every week and its code was never in a state worth freezing. v3 was built to be publishable: one rule tree, one orchestration protocol shared by both engines. The working repo is now being migrated to the new name (paths, database, environment); the scrubbed code release follows that migration. Until then the runnable reference code is the archived **v1**.
 
-> **What this README describes.** The body below is the **v2 edition** as it last ran — two advocates + an arbiter, backed by Postgres and run agent-natively. The original three-debater, file-based v1 is archived in [`README-v1.md`](README-v1.md) and frozen on the [`v1` branch](../../tree/v1).
+> **What this README describes.** The body below still describes the **v2 edition** as it last ran — two advocates + an arbiter, backed by Postgres and run agent-natively; the v3 write-up arrives together with the code. The original three-debater, file-based v1 is archived in [`README-v1.md`](README-v1.md) and frozen on the [`v1` branch](../../tree/v1).
 >
 > **→ Read the [Design Philosophy / 设计哲学](docs/design-philosophy.md)** (bilingual) for the whole story — including *why* v1 became v2, and why v2 is now being rebuilt.
 
@@ -43,11 +44,11 @@ Apex Quant is an LLM-based multi-agent framework for quantitative analysis. Befo
 - **A pricing chain with a shared reference ruler** — roughly, net expected move over a reference range — so the three parties disagree about *inputs*, not about scales. A move is "what should now be counted, minus what was already counted": repeating settled evidence moves nothing, and winning an argument earns no points by itself.
 - **Evidence reported as it is.** Confirmed, refuted, partly true and not found are all normal results. Verification applies to factual claims and states its scope; a forecast is argued on the ledger, never "verified."
 - **One rule tree, one protocol.** Principles are always loaded; model manuals load on demand; a single orchestration protocol and a step-driven script are shared by both engines, behind one factory gate.
-- **Plain names.** The confidence dial becomes a *composite score*, a task a *model call*, a playbook a *model manual*, and so on. This README keeps the v2 vocabulary until v3.0 goes live.
+- **Plain names.** The confidence dial becomes a *composite score*, a task a *model call*, a playbook a *model manual*, and so on. The body of this README still uses the v2 vocabulary; it is rewritten with the code release.
 
 **The risk I watch hardest** is the one the 🧩 entry describes: a big refactor silently dropping load-bearing rules. So the rebuild came with a line-by-line loss audit of roughly a thousand rule rows. Very little was lost outright, but about a tenth came through weakened — and almost always the same half of a paired rule: the constraint survived, the encouragement to act did not. Those are being restored one by one. The standard is that v3.0 must be *fuller* than the old version, not thinner.
 
-**Status.** Smoke debates have been running end to end since 2026-10-01. The production cut-over — and with it the code release — follows once they hold up against the baseline.
+**Status.** v3.0 went into production on 2026-10-02, with 37 US names in the first batch. v3.1 followed on 10-08 — a first balance pass and a fix for the mid-band deadlock — and v3.2 on 10-17: order horizons decoupled from path horizons, market and limit entries merged into one *entry* whose kind is derived from the price, and a post-mortem that settles the chosen operation side by side with its alternatives. The first 112 v3.1 debates scored level with v2 on average, but with both tails fatter — HOLD fell from 65% to 9% of calls — which is the behavior the rebuild was after; the next cuts are aimed at the inputs. The rename to Equipoise landed on 10-17; the code release follows the migration.
 
 ---
 
@@ -128,7 +129,15 @@ The transferable part of this project isn't the code — it's what the work *tau
 
 ---
 
-## 📄 Paper
+<a id="easter-eggs"></a>
+
+## 🥚 Easter eggs
+
+Three things this project has outgrown, kept on purpose.
+
+- **The old name.** It started life as *Apex Quant* — a name Gemini suggested when all I could say was "I want to do LLM quant." The mirror was `apex_parliament` (a chamber of AIs arguing their way to a vote), the dashboard *apex dash*, the Claude Code twin *apex codex*. They are all Equipoise now; the story of the rename is in the 🌱 entry of the [design philosophy](docs/design-philosophy.md).
+- **The old address.** The project first lived at [`sst19910323/apex_parliament`](https://github.com/sst19910323/apex_parliament). That account was compromised in August 2026 and, as things stand, isn't coming back — so this repo, on my second account, is the project's home rather than a temporary one. Same author, same history, carried over.
+- **The old paper.** Written in March 2026 about the v1 three-debater parliament, it now reads like a description of a different system. It remains the citable record of where this began:
 
 > **Apex Quant: A Multi-Agent Debate Framework for Quantitative Trading**
 > Shuting Sun · SSRN Technical Report · March 2026
@@ -160,12 +169,13 @@ The original edition — three debaters (Zealot / Reaper / **Fulcrum**) + a sepa
 
 The cast's headcount tells the first arc — one overconfident agent → two → three → and back to two. The rest of the story is what layered on top: a **reckoner + BP loop** that trains the system on its own hindsight, the **task mode** now gradually taking shape (debate ⊃ task ⊃ evidence), and the shift off a self-built **API stack** onto **agent-native** runners (Claude Code / GPT Codex).
 
-In version terms: **Beta** (the undocumented single-agent and two-role days) → **v1.0** (the three-debater parliament, until 2026-07-18) → **v2.0** (two advocates + an arbiter, last production batch 2026-09-29) → **v3.0** (the ground-up rebuild, started 2026-09-30).
+In version terms: **Beta** (the undocumented single-agent and two-role days) → **v1.0** (the three-debater parliament, until 2026-07-18) → **v2.0** (two advocates + an arbiter, last production batch 2026-09-29) → **v3.0** (the ground-up rebuild, started 2026-09-30, in production since 10-02; v3.1 on 10-08, v3.2 on 10-17).
 
-The two latest milestones:
+The latest milestones:
 
 - **2026-09-30** — Enough small releases had piled up that a layered structure had formed on its own. The rebuild of the complete trading-cognition system began, following that naturally-formed layering rather than a diagram drawn in advance.
-- **2026-10-07** — The name "Apex Quant," suggested by Gemini when all I could say was "I want to do LLM quant," no longer fits a project that has grown a style of its own. The future name is **Equipoise（均势）**, and its logo now sits in the root of the working repo. The rename itself is a long way off — when it happens, everything changes at once.
+- **2026-10-07** — The name "Apex Quant," suggested by Gemini when all I could say was "I want to do LLM quant," no longer fit a project that had grown a style of its own. The real name was settled: **Equipoise（均势）** — balance under hard contention. The rename itself waited until everything could change at once.
+- **2026-10-17** — Everything changes at once: the working repo becomes `equipoise`, this mirror `equipoise_open`, the dashboard *Equipoise Dash*. The same day v3.2 goes live. The chart above still carries the old heading — one more easter egg.
 
 ![timeline](images/timeline-v2.png)
 
@@ -187,21 +197,23 @@ Questions and discussion welcome: **sst19910323@gmail.com**
 
 <a id="中文版"></a>
 
-> ⚠️ **临时住所。** 我的原 GitHub 账号 [`sst19910323`](https://github.com/sst19910323) 被盗后暂被平台冻结，申诉找回中。在要回来之前，本项目临时在这个小号同步更新。本仓库与原仓库 [`sst19910323/apex_parliament`](https://github.com/sst19910323/apex_parliament) 是**同一个项目**——内容、历史、作者都相同。
+<p align="center"><img src="images/equipoise-logo.png" alt="Equipoise 均势" width="420"></p>
 
-# ⚖️ Apex Quant — 中文
+# ⚖️ Equipoise（均势）— 中文
 
 ### 基于对抗性多智能体辩论的量化分析框架
 
+> **原名 Apex Quant。** 2026-10-17 起，项目正式启用真正的名字——**Equipoise（均势）**，激烈交锋之下的均衡——这个公开镜像也随之改名 `equipoise_open`。旧名字、旧地址和旧论文都留着，当作文末的[彩蛋](#彩蛋)。
+
 ---
 
-Apex Quant 是一个基于大语言模型的多智能体量化分析框架。在给出任何决策之前，持**对立立场**的 agent 必须先完成一场结构化辩论。多数多智能体交易框架按**数据类型**分工（基本面、情绪、技术面），而 Apex Quant 按**立场**分工。框架本身与市场无关，当前实现覆盖美股 / 欧股 / 日股 / 韩股。
+Equipoise 是一个基于大语言模型的多智能体量化分析框架。在给出任何决策之前，持**对立立场**的 agent 必须先完成一场结构化辩论。多数多智能体交易框架按**数据类型**分工（基本面、情绪、技术面），而 Equipoise 按**立场**分工。框架本身与市场无关，当前实现覆盖美股 / 欧股 / 日股 / 韩股。
 
-> **🚧 2026 年 10 月——一个转折点。** v2 这条线在 **2026-09-29** 跑完了最后一批生产场。第二天，一次推倒重来的 **v3.0 整体重建**开工——规则、编排、命名，全部在一份顶层设计下重做——首场端到端辩论已于 **2026-10-01** 跑通。细节见紧接着的 [v3.0 一节](#v3-重建)。
+> **🚧 2026 年 10 月——一个转折点。** v2 这条线在 **2026-09-29** 跑完了最后一批生产场。第二天，一次推倒重来的 **v3.0 整体重建**开工——规则、编排、命名，全部在一份顶层设计下重做。它于 **2026-10-02** 切入生产，之后是 v3.1（10-08）和 v3.2（10-17）；**2026-10-17**，项目启用真正的名字 **Equipoise**。细节见紧接着的 [v3.0 一节](#v3-重建)。
 >
-> **代码快来了。** 此前这个仓库只开源了**思路**——设计哲学和这份 README——因为 v2 每周都在变，代码从来没到值得冻结的状态。v3.0 从一开始就是按"能公开"来建的：一棵规则树，一份两个引擎共用的编排协议。等它切换进生产，脱敏后的代码就会发布到这里。在那之前，可运行的参考代码仍是存档的 **v1**。
+> **代码快来了。** 此前这个仓库只开源了**思路**——设计哲学和这份 README——因为 v2 每周都在变，代码从来没到值得冻结的状态。v3 从一开始就是按"能公开"来建的：一棵规则树，一份两个引擎共用的编排协议。工作仓库眼下正在往新名字迁移（路径、数据库、环境变量）；迁完，脱敏后的代码就会发布到这里。在那之前，可运行的参考代码仍是存档的 **v1**。
 
-> **这份 README 写的是什么。** 下面的正文是 **v2 版**最后运行时的样子——二元辩手 + 一位仲裁者，底层 Postgres，以 agent 原生方式运行。最初那套三辩手、基于文件的 v1 已存档在 [`README-v1.md`](README-v1.md)，并冻结在 [`v1` 分支](../../tree/v1)。
+> **这份 README 写的是什么。** 下面的正文写的仍是 **v2 版**最后运行时的样子——二元辩手 + 一位仲裁者，底层 Postgres，以 agent 原生方式运行；v3 的正文会和代码一起到。最初那套三辩手、基于文件的 v1 已存档在 [`README-v1.md`](README-v1.md)，并冻结在 [`v1` 分支](../../tree/v1)。
 >
 > **→ 完整来龙去脉（包括*为什么*从 v1 走到 v2、又为什么 v2 现在要重建）见 [设计哲学 / Design Philosophy](docs/design-philosophy.md)**（中英双语）。
 
@@ -226,11 +238,11 @@ Apex Quant 是一个基于大语言模型的多智能体量化分析框架。在
 - **一条带共用参考尺的定价链** —— 大致是"净期望 ÷ 参考波幅" —— 让三方争的是*输入*，而不是各用各的尺子。一次移动 = "现在应计入的影响 − 此前已计入的影响"：复述已结算的证据一分不动，辩赢本身也不加分。
 - **证据实事求是。** 证实、证伪、部分成立、没查到，都是正常结果。核定只针对事实主张，并写清适用范围；预测只能在账本上辩，不存在"被验证"。
 - **一棵规则树，一份协议。** 原则常驻；模型手册按需装载；一份编排协议加一个按步骤驱动的脚本由两个引擎共用，后面只有一道出厂闸。
-- **大白话命名。** 信心刻度改叫*综合评分*，task 改叫*模型调用*，playbook 改叫*模型手册*，等等。v3.0 正式上线之前，这份 README 仍沿用 v2 的叫法。
+- **大白话命名。** 信心刻度改叫*综合评分*，task 改叫*模型调用*，playbook 改叫*模型手册*，等等。这份 README 的正文仍沿用 v2 的叫法，随代码发布一起重写。
 
 **我盯得最紧的风险**，正是 🧩 那条写过的：大重构会悄悄丢掉承重的规则。所以这次重建配了一次逐行的丢失核查，过了一千来行规则。整条丢掉的极少，但约一成被弱化了——而且弱化的几乎总是成对条款里的同一半：约束那半留下了，鼓励出手那半没了。这些正在一条条补回去。标准是 v3.0 必须比旧版*更充分*，而不是更瘦。
 
-**现状。** 冒烟场从 2026-10-01 起已能端到端跑通。等它们对着基线站得住，就切换生产——代码也随之发布。
+**现状。** v3.0 已于 2026-10-02 切入生产，首批 37 只美股。v3.1 在 10-08 跟上——第一组平衡性修正，加上中间带死局的修复；v3.2 在 10-17：订单期限与路径期限解绑，市价单和限价单合并成一个"入场"、由价位派生类型，复盘把所选操作和它的备选并排清算。v3.1 头 112 场的均分与 v2 持平，但两尾都更肥了——HOLD 从 65% 降到 9%——这正是重建要的行为换血；下一刀对准输入端。改名 Equipoise 在 10-17 落地；代码发布跟在迁移之后。
 
 ---
 
@@ -311,7 +323,15 @@ BP = **反向传播**：辩论是前向推理，后验是对真实标签算误�
 
 ---
 
-## 📄 论文
+<a id="彩蛋"></a>
+
+## 🥚 彩蛋
+
+三样项目已经长过了头、却特意留下的东西。
+
+- **旧名字。** 它最初叫 *Apex Quant*——当初跟 Gemini 说"要做 LLM 的量化"时它起的名。镜像叫 `apex_parliament`（一屋子 AI 吵架、投票表决的议会），看板叫 *apex dash*，Claude Code 平行版叫 *apex codex*。现在它们都叫 Equipoise；改名的来龙去脉在[设计哲学](docs/design-philosophy.md)的 🌱 一条里。
+- **旧地址。** 项目最早住在 [`sst19910323/apex_parliament`](https://github.com/sst19910323/apex_parliament)。那个账号 2026 年 8 月被盗，目前看是找不回来了——所以这个小号上的仓库就是项目的家，不再是临时住所。作者相同，历史完整搬过来了。
+- **旧论文。** 2026 年 3 月写的，讲的是 v1 三辩手议会，现在读起来像另一套系统。但它仍是这一切起点的可引用记录：
 
 > **Apex Quant: A Multi-Agent Debate Framework for Quantitative Trading**
 > Shuting Sun · SSRN 技术报告 · 2026 年 3 月
@@ -334,12 +354,13 @@ BP = **反向传播**：辩论是前向推理，后验是对真实标签算误�
 
 阵容的人数是故事的前半段——一个过度自信的单 agent → 两个 → 三个 → 又收回两个。后半段是层层叠上去的东西：一个让系统用自己"事后诸葛"训练自己的 **reckoner + BP 闭环**、如今逐渐成形的 **task 模式**（辩论 ⊃ task ⊃ evidence），以及从自搭的 **API 版**转向 **agent 原生**运行版（Claude Code / GPT Codex）。
 
-按大版本算：**Beta**（没留下详细记录的单 agent 与双角色草创期）→ **v1.0**（三辩手议会，到 2026-07-18）→ **v2.0**（两位辩手 + 一位仲裁者，最后一批生产场 2026-09-29）→ **v3.0**（推倒重来的整体重建，2026-09-30 开工）。
+按大版本算：**Beta**（没留下详细记录的单 agent 与双角色草创期）→ **v1.0**（三辩手议会，到 2026-07-18）→ **v2.0**（两位辩手 + 一位仲裁者，最后一批生产场 2026-09-29）→ **v3.0**（推倒重来的整体重建，2026-09-30 开工，10-02 起在生产运行；v3.1 10-08，v3.2 10-17）。
 
-最新的两个节点：
+最新的几个节点：
 
 - **2026-09-30** —— 小版本更新积累下来，一个分层的结构已经自然形成。于是开始按照这个自然形成的分层，完整重构整套交易认知体系。
-- **2026-10-07** —— 当初跟 Gemini 3 说"要做 LLM 的量化"时还没做出自己的风格，它起的 "Apex Quant" 现在看不太合适了。将来的名字定为 **Equipoise（均势）**，logo 已放进工作仓库的根目录。改名本身还早——到时候所有地方一起换。
+- **2026-10-07** —— 当初跟 Gemini 3 说"要做 LLM 的量化"时还没做出自己的风格，它起的 "Apex Quant" 已经不像这套系统真正的样子。正式名字定下：**Equipoise（均势）**——激烈交锋之下的均衡。改名本身等到所有地方能一起换的那天。
+- **2026-10-17** —— 所有地方一起换：工作仓库改名 `equipoise`，这个镜像改名 `equipoise_open`，看板改名 *Equipoise Dash*。同一天 v3.2 上线。上面这张图的标题还是旧名——又一个彩蛋。
 
 ![timeline](images/timeline-v2.png)
 
