@@ -1,7 +1,5 @@
 **English** | [**中文**](#中文版)
 
-<p align="center"><img src="images/equipoise-logo.png" alt="Equipoise 均势" width="420"></p>
-
 # ⚖️ Equipoise（均势）
 
 ### Adversarial Multi-Agent Debate Framework for Quantitative Analysis
@@ -196,8 +194,6 @@ Questions and discussion welcome: **sst19910323@gmail.com**
 ---
 
 <a id="中文版"></a>
-
-<p align="center"><img src="images/equipoise-logo.png" alt="Equipoise 均势" width="420"></p>
 
 # ⚖️ Equipoise（均势）— 中文
 
