@@ -13,15 +13,15 @@
 
 Equipoise is an LLM-based multi-agent framework for quantitative analysis. Before any decision is emitted, agents holding **opposing stances** must complete a structured debate. Most multi-agent trading frameworks split agents by **data type** (fundamentals, sentiment, technicals); Equipoise splits them by **stance**. The framework is market-agnostic; the current implementation covers US / EU / JP / KR equities.
 
-> **🚧 October 2026 — a turning point.** The v2 line ran its last production batch on **2026-09-29**. The next day a ground-up **v3.0 rebuild** began — rules, orchestration and naming all redone under one top-level design. It went into production on **2026-10-02**, followed by v3.1 (10-08) and v3.2 (10-17); and on **2026-10-17** the project took its real name, **Equipoise**. Details in [the v3.0 section](#v3-rebuild) just below.
+> **🚧 October 2026 — a turning point.** The v2 line ran its last production batch on **2026-09-29**. The next day a ground-up **v3.0 rebuild** began — rules, orchestration and naming all redone under one top-level design. It went into production on **2026-10-02**, followed by v3.1 (10-08), v3.2 (10-17) and v3.3 (10-25: an English core and a rebuilt technical snapshot); and on **2026-10-17** the project took its real name, **Equipoise**. Details in [the v3.0 section](#v3-rebuild) just below.
 >
-> **Code is coming.** Until now this repo has open-sourced only the **thinking** — the design philosophy and this README — because v2 changed every week and its code was never in a state worth freezing. v3 was built to be publishable: one rule tree, one orchestration protocol shared by both engines. The working repo is now being migrated to the new name (paths, database, environment); the scrubbed code release follows that migration. Until then the runnable reference code is the archived **v1**.
+> **Code is coming.** Until now this repo has open-sourced only the **thinking** — the design philosophy and this README — because v2 changed every week and its code was never in a state worth freezing. v3 was built to be publishable: one rule tree, one orchestration protocol shared by both engines. The working repo finished its move to the new name (paths, database, environment) on 10-23; the scrubbed code release is what comes next. Until then the runnable reference code is the archived **v1**.
 
 > **What this README describes.** The body below still describes the **v2 edition** as it last ran — two advocates + an arbiter, backed by Postgres and run agent-natively; the v3 write-up arrives together with the code. The original three-debater, file-based v1 is archived in [`README-v1.md`](README-v1.md) and frozen on the [`v1` branch](../../tree/v1).
 >
 > **→ Read the [Design Philosophy / 设计哲学](docs/design-philosophy.md)** (bilingual) for the whole story — including *why* v1 became v2, and why v2 is now being rebuilt.
 
-> **Language note:** prompts, debate transcripts, and analysis output are Chinese-only for now. A dedicated translation layer that renders each final report into other languages is planned as a clean downstream step.
+> **Language note:** from **2026-10-26** the system's working language is **English** — rules, debate transcripts, final reports and post-mortem verdicts are written in English and stored as the source of truth; Chinese and other languages are rendered from them by a translation step, for reports and verdicts only (the debate itself is not translated). Everything produced before that date is Chinese-only and stays as it is.
 
 ---
 
@@ -46,7 +46,7 @@ Equipoise is an LLM-based multi-agent framework for quantitative analysis. Befor
 
 **The risk I watch hardest** is the one the 🧩 entry describes: a big refactor silently dropping load-bearing rules. So the rebuild came with a line-by-line loss audit of roughly a thousand rule rows. Very little was lost outright, but about a tenth came through weakened — and almost always the same half of a paired rule: the constraint survived, the encouragement to act did not. Those are being restored one by one. The standard is that v3.0 must be *fuller* than the old version, not thinner.
 
-**Status.** v3.0 went into production on 2026-10-02, with 37 US names in the first batch. v3.1 followed on 10-08 — a first balance pass and a fix for the mid-band deadlock — and v3.2 on 10-17: order horizons decoupled from path horizons, market and limit entries merged into one *entry* whose kind is derived from the price, and a post-mortem that settles the chosen operation side by side with its alternatives. The first 112 v3.1 debates scored level with v2 on average, but with both tails fatter — HOLD fell from 65% to 9% of calls — which is the behavior the rebuild was after; the next cuts are aimed at the inputs. The rename to Equipoise landed on 10-17; the code release follows the migration.
+**Status.** v3.0 went into production on 2026-10-02, with 37 US names in the first batch. v3.1 followed on 10-08 — a first balance pass and a fix for the mid-band deadlock — and v3.2 on 10-17: order horizons decoupled from path horizons, market and limit entries merged into one *entry* whose kind is derived from the price, and a post-mortem that settles the chosen operation side by side with its alternatives. The first 112 v3.1 debates scored level with v2 on average, but with both tails fatter — HOLD fell from 65% to 9% of calls — which is the behavior the rebuild was after; the next cuts are aimed at the inputs. The rename to Equipoise landed on 10-17. v3.3 (deployed 10-25, live from 10-26) switches the core language to English and rebuilds the technical snapshot: price structure is now read at three genuinely different resolutions, after a bug that had the two shorter lenses sharing one dataset (the 🔭 entry in the design philosophy). The code release is next.
 
 ---
 
@@ -205,15 +205,15 @@ Questions and discussion welcome: **sst19910323@gmail.com**
 
 Equipoise 是一个基于大语言模型的多智能体量化分析框架。在给出任何决策之前，持**对立立场**的 agent 必须先完成一场结构化辩论。多数多智能体交易框架按**数据类型**分工（基本面、情绪、技术面），而 Equipoise 按**立场**分工。框架本身与市场无关，当前实现覆盖美股 / 欧股 / 日股 / 韩股。
 
-> **🚧 2026 年 10 月——一个转折点。** v2 这条线在 **2026-09-29** 跑完了最后一批生产场。第二天，一次推倒重来的 **v3.0 整体重建**开工——规则、编排、命名，全部在一份顶层设计下重做。它于 **2026-10-02** 切入生产，之后是 v3.1（10-08）和 v3.2（10-17）；**2026-10-17**，项目启用真正的名字 **Equipoise**。细节见紧接着的 [v3.0 一节](#v3-重建)。
+> **🚧 2026 年 10 月——一个转折点。** v2 这条线在 **2026-09-29** 跑完了最后一批生产场。第二天，一次推倒重来的 **v3.0 整体重建**开工——规则、编排、命名，全部在一份顶层设计下重做。它于 **2026-10-02** 切入生产，之后是 v3.1（10-08）、v3.2（10-17）和 v3.3（10-25：英文核心、重建的技术快照）；**2026-10-17**，项目启用真正的名字 **Equipoise**。细节见紧接着的 [v3.0 一节](#v3-重建)。
 >
-> **代码快来了。** 此前这个仓库只开源了**思路**——设计哲学和这份 README——因为 v2 每周都在变，代码从来没到值得冻结的状态。v3 从一开始就是按"能公开"来建的：一棵规则树，一份两个引擎共用的编排协议。工作仓库眼下正在往新名字迁移（路径、数据库、环境变量）；迁完，脱敏后的代码就会发布到这里。在那之前，可运行的参考代码仍是存档的 **v1**。
+> **代码快来了。** 此前这个仓库只开源了**思路**——设计哲学和这份 README——因为 v2 每周都在变，代码从来没到值得冻结的状态。v3 从一开始就是按"能公开"来建的：一棵规则树，一份两个引擎共用的编排协议。工作仓库已于 10-23 迁完新名字（路径、数据库、环境变量）；接下来就是脱敏后的代码发布。在那之前，可运行的参考代码仍是存档的 **v1**。
 
 > **这份 README 写的是什么。** 下面的正文写的仍是 **v2 版**最后运行时的样子——二元辩手 + 一位仲裁者，底层 Postgres，以 agent 原生方式运行；v3 的正文会和代码一起到。最初那套三辩手、基于文件的 v1 已存档在 [`README-v1.md`](README-v1.md)，并冻结在 [`v1` 分支](../../tree/v1)。
 >
 > **→ 完整来龙去脉（包括*为什么*从 v1 走到 v2、又为什么 v2 现在要重建）见 [设计哲学 / Design Philosophy](docs/design-philosophy.md)**（中英双语）。
 
-> **语言说明：** prompt、辩论记录与分析输出目前仅中文。计划在下游单设一层翻译，把每份终报干净地渲染成其他语言。
+> **语言说明：** 自 **2026-10-26** 起，系统的工作语言是**英文**——规则、辩论记录、终报与复盘判词的原文都是英文，并以英文作为入库的真相；中文和其他语言由一道翻译步从原文渲染，只翻报告与判词（辩论过程不翻）。此前产出的内容仅中文，原样保留。
 
 ---
 
@@ -238,7 +238,7 @@ Equipoise 是一个基于大语言模型的多智能体量化分析框架。在�
 
 **我盯得最紧的风险**，正是 🧩 那条写过的：大重构会悄悄丢掉承重的规则。所以这次重建配了一次逐行的丢失核查，过了一千来行规则。整条丢掉的极少，但约一成被弱化了——而且弱化的几乎总是成对条款里的同一半：约束那半留下了，鼓励出手那半没了。这些正在一条条补回去。标准是 v3.0 必须比旧版*更充分*，而不是更瘦。
 
-**现状。** v3.0 已于 2026-10-02 切入生产，首批 37 只美股。v3.1 在 10-08 跟上——第一组平衡性修正，加上中间带死局的修复；v3.2 在 10-17：订单期限与路径期限解绑，市价单和限价单合并成一个"入场"、由价位派生类型，复盘把所选操作和它的备选并排清算。v3.1 头 112 场的均分与 v2 持平，但两尾都更肥了——HOLD 从 65% 降到 9%——这正是重建要的行为换血；下一刀对准输入端。改名 Equipoise 在 10-17 落地；代码发布跟在迁移之后。
+**现状。** v3.0 已于 2026-10-02 切入生产，首批 37 只美股。v3.1 在 10-08 跟上——第一组平衡性修正，加上中间带死局的修复；v3.2 在 10-17：订单期限与路径期限解绑，市价单和限价单合并成一个"入场"、由价位派生类型，复盘把所选操作和它的备选并排清算。v3.1 头 112 场的均分与 v2 持平，但两尾都更肥了——HOLD 从 65% 降到 9%——这正是重建要的行为换血；下一刀对准输入端。改名 Equipoise 在 10-17 落地。v3.3（10-25 部署，10-26 起生效）把核心语言切成英文，并重建了技术快照：价格结构从此在三个真正不同的分辨率上读，此前有个 bug 让两个较短的镜头共用同一份数据（见设计哲学 🔭 一条）。接下来是代码发布。
 
 ---
 

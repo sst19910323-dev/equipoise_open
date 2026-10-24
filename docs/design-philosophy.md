@@ -27,15 +27,11 @@ LLMs taught me finance, so I naively assumed they could trade by nature — inst
 
 ## 🧬 This cast was argued into existence
 
-At first there was just one agent — and it chased pumps and dumps all the same. So I gave it a "heckler," whose only job was to kick it and keep it from drifting — and that's how the debate was born. The two agents gradually split duties: one handled "action" (buy and sell), the other "holding back." Until a failed gold play made it clear: that trader actually **couldn't sell** — call the direction wrong and the best the heckler could do was drag it back to HOLD; the ceiling on error-correction was "just stop." So I split the trader's personality into the optimistic **Zealot** and the bean-counting **Reaper**, and only then could correction point the *other* way.
+At first there was just one agent — and it chased pumps and dumps all the same. So I gave it a "heckler," whose only job was to kick it and keep it from drifting — and that's how the debate was born. The two agents gradually split duties: one handled "action" (buy and sell), the other "holding back." Until a failed gold play made it clear: that trader actually **couldn't sell** — call the direction wrong and the best the heckler could do was drag it back to HOLD; the ceiling on error-correction was "just stop."
 
-## ⚖️ The opposite of a bull isn't a bear — it's the one taking profit
+So I split the trader's personality. The direction of the cut was the key: buying and selling are two mutually exclusive states of mind; stuff both into one agent and it won't argue each fairly — it ends up **leaning toward whichever is stronger** (usually optimism), and the stance gets quietly hijacked. So the real mirror isn't "bull vs. bear" — it's the optimistic **Zealot** against the **Reaper** who only asks "is this position still worth keeping?" Reaper isn't bearish; he's just doing the math. From then on, correction could point both ways.
 
-Buying and selling are two mutually exclusive states of mind. Stuff both into one agent and it won't argue each fairly — it ends up **leaning toward whichever is stronger** (usually optimism); the stance gets quietly hijacked. So the real mirror in this system isn't "bull vs. bear" — it's splitting it into two independent personalities: the optimistic **Zealot**, and the **Reaper** who only asks "is this position still worth keeping?" Reaper isn't bearish; he's just doing the math.
-
-## 🚲 The messiest-looking debate is the steadiest
-
-Three AIs squabbling like mad — you'd assume the output must be a mess. The opposite: its consistency is far higher than "each one quietly thinks it through alone." **Stability never comes from stillness; it comes from sustained opposition** — each side is watched and pressed by the other two, so no one can quietly veer off. A bicycle stays up by speed; a debate converges by opposition.
+Counterintuitively, the cast that squabbles hardest is the steadiest: several AIs going at it hammer and tongs, yet the output's consistency is far higher than "each one quietly thinks it through alone." **Stability never comes from stillness; it comes from sustained opposition** — each side is watched and pressed by the others, so no one can quietly veer off. A bicycle stays up by speed; a debate converges by opposition.
 
 ## ♻️ 1 → 2 → 3, and back to 2
 
@@ -74,21 +70,17 @@ This thing started as a static LangGraph: mechanical scheduling plus a pile of f
 
 The hard half is rhythm: making it **breathe steadily**. The ideal, fully automatic scheduler — the AIs proposing the next round's timing after they argue, overtime when the market goes extreme — has stayed stuck on two things: **quota** (Codex consumption has been enormous lately; it can no longer sustain even one round a day) and **an IBKR reconnect that needs me physically present**. For a while a Hermes agent served as a "dumb alarm clock," waking Claude Code at fixed times, and automating it produced nothing but instability and permission gremlins. Wait for it to become fully stable? That day wasn't coming. So I settled on a **semi-smart mode**: the trigger is still manual, but the conversational agent first reads the next round's timetable, when the last round finished, the remaining usage and the quota-reset signals, and works out how many debates this run should fire. The root cause, bluntly, is being broke — yet the scheduler that poverty produced is the one that shipped first. Most systems that run smoothly have a stretch behind them, unseen, where they couldn't catch their breath.
 
-## 🧭 Continuity must be earned, never inherited
-
-Every round of analysis is forbidden from peeking at its own previous report; it must re-fix its bearings against the current real data — otherwise error drifts ever further, like inertial navigation. The counterintuitive part: forbidden from copying, the output is nonetheless highly continuous — because that continuity comes from the market itself, not from the model copying its own history.
-
 ## 🧧 Cyber-Boxers: write a good mantra, then summon the patriarch
 
 From the very first version, the whole constitution has been **highly distilled abstract principle — no examples, no specific numbers, no patches for some particular stock in some particular stretch of market**. I call my own approach "Cyber-Boxers" (赛博义和团, after the ritual-chanting Boxers who believed the chants made them invulnerable): don't teach it specific moves, just write a set of mantra-like inner principles, then summon the patriarch to possess it and let the model fight. Sounds mystical; the logic is solid — the moment you start patching, the constitution decays into a list of "mistakes once made," useful only when history repeats; abstract mantras are what transfer: they hold in a bull market, hold in a bear, hold in markets you've never seen.
 
 ## 🔧 Don't beg the model — sculpt the pipeline
 
-I don't pour in raw time series; I first reduce it to 50-odd indicators; fields that would mislead during pre/post-market I just null out. The model is a component with known specs, and the architecture's whole job is to not push it past spec. As for hallucination, a single reminder to "restrain yourself" is enough — don't count on them supervising each other: three drunks can't prop up a straight line.
+The model is a component with known specs, and the architecture's whole job is to not push it past spec. So I don't pour in raw time series; I first reduce it to 50-odd indicators; fields that would mislead during pre/post-market I just null out. As for hallucination, a single reminder to "restrain yourself" is enough — don't count on them supervising each other: three drunks can't prop up a straight line.
 
-## 🏷️ A bug where an LLM's architecture meets human intuition
+The same principle governs "whether to feed it history": every round of analysis is forbidden from peeking at its own previous report; it must re-fix its bearings against the current real data — otherwise error drifts ever further, like inertial navigation. The counterintuitive part: forbidden from copying, the output is nonetheless highly continuous — because that continuity comes from the market itself, not from the model copying its own history. **Continuity must be earned, never inherited.**
 
-For a while QQQ's and SPY's numbers sat very close together, and the AI actually mixed up the two's quantitative indicators. Reviewing it, I realized: this is the difference between an **attention mechanism** and **human intuition** — a person reading a table instinctively glances at the header first to confirm "whose column is this?"; but the AI is attention, and won't compulsively double back to verify ownership — once the numbers are close it misattributes them. The fix is plain and redundant: weld onto every necessary variable a prefix marking "whom it belongs to," so ownership becomes impossible to confuse at the syntactic level.
+Another time I ran into the nature of attention itself: for a while QQQ's and SPY's numbers sat very close together, and the AI actually swapped the two's quantitative indicators. A person reading a table instinctively glances at the header first to confirm "whose column is this?"; attention won't compulsively double back to verify ownership. The fix is plain and redundant: weld onto every necessary variable a prefix marking "whom it belongs to," so ownership becomes impossible to confuse at the syntactic level. Pipeline work, at bottom, is welding into the data in advance the checks the model won't do for itself.
 
 ## 🃏 It went crazy? No — it computed to the fifth level
 
@@ -126,17 +118,15 @@ BP has stepped in pits of its own, and the slyest one is this: **post-mortem sco
 
 One aside: BP and the lateral-evidence idea above were both sketched back in early 2026, on nothing but a hunch that it should be done this way — and they did pan out; it just took the better part of a year from idea to running code. Not because "good design deserves to wait" — bluntly, this is a one-person **labor of love**, with no resources to build fast, so it gets ground out piece by piece as time allows.
 
-## 📦 A debate's total information is conserved; the model only decides how many rounds to pack it into
-
-The total information needed to converge is roughly fixed; model capability only decides how many rounds it gets packed into. A smarter Claude writes more per round yet converges faster — "talks more" and "fewer rounds" show up together. So round count itself isn't a quality metric: what a smart model says in three rounds, a dim one might grind out over eight, and the information emitted is about the same.
-
 ## 🌡️ Different LLMs each have their own temperament
 
-The same constitution on different models gives wildly different results — because they're genuinely different personalities:
+First, a conservation law: the total information needed to converge is roughly fixed; model capability only decides **how many rounds it gets packed into**. What a smart model says in three rounds, a dim one might grind out over eight, and the information emitted is about the same — so round count itself was never a quality metric.
+
+And the same constitution on different models gives wildly different results — because they're genuinely different personalities:
 
 - **DeepSeek V3**: a not-too-bright contrarian who starts parroting himself once the argument drags on — yet who often, with one jab, hits the very problem everyone else overlooked (V4 mellowed out a lot).
 - **Qwen-Plus**: a people-pleaser who caves the moment the other side pushes; worse as a judge, where it declares the debate over early on its own — the direct reason the judging power was later stripped entirely from the AI "Chronicler" seat.
-- **Claude**: the smartest, one sentence doing the work of three, and the best proof of the previous point — the stronger the model, the more it packs the same information into fewer rounds.
+- **Claude**: the smartest, one sentence doing the work of three, and the best proof of the conservation law above — the stronger the model, the more it packs the same information into fewer rounds.
 
 There's also a counterintuitive little finding: **higher temperature is actually better** — the model is more flexible, and no extra hallucinations show up. The real trouble is a dim model at low temperature: rigid, parroting, picking fights with everyone, yet especially easy to fool with a stretch of pretty rhetoric (loudest in nitpicking, emptiest in conviction).
 
@@ -226,6 +216,18 @@ Reading the ancient debate archives — around March, back in the three-debater 
 
 So I'm considering adding a plain-language passage to the report. The difficulty sits at both ends: a sentence or two of summary can no longer hold the information a debate now carries, while the full body is too dense to serve as reading material — there's a missing layer in between. If it goes in, one boundary has to be held absolutely: that passage may only *translate*, never *compose* — the moment it starts improvising, the bare rhetoric that staked pricing finally drove out comes back in through the back door. Undecided; noted here. The opening line of these notes was "talking isn't doing." A year on, it does better and better — and can nearly no longer talk.
 
+## 🩼 Retiring a crutch
+
+Today I formally removed the "copy this page" button that had sat in the top-right corner of the frontend since the ancient versions. Its lifetime is exactly this system's trust curve. The earliest use is a little embarrassing to admit: back then the AI was unreliable enough that I mostly used the button to copy the **quantitative data**, dump the whole bundle on the stronger Gemini and Claude of the day, and mostly listen to them — the system's own output barely rated as a draft. Later it graduated to copying the **whole report**: the conclusions were worth taking as a serious reference by then, so I'd hand them to the Claudes for a second opinion.
+
+Later still, I found that a top model glancing at a report on the spot could **no longer judge** its quality — the only thing that could still tell good from bad was the post-mortem after the fact, and even that had to follow the rules (align volatility, measure before touching the mechanism, and so on); meanwhile the output's quality had steadied, and the post-mortem volumes spoke for themselves, one after another. So the button sat idle for a long time, and only when I reached to remove it today did I understand: **a crutch isn't thrown away — it's first forgotten, without anyone noticing.** A feature's retirement marks how far a system has grown better than its launch ever did.
+
+## 🔭 Surgery with a telescope: the big bug I picked up while polishing the UI
+
+From October 2025 to today I've lived through, more or less, the whole maturing of AI agents: at first building the architecture myself and copy-pasting back and forth with a web chat; then handing the whole project over to agents to run; and a few days ago one step further — to avoid any single agent's habits of mind, Claude can now summon GPT and Gemini on the spot and convene a council. Development has never been this fast; sometimes there's enough slack to polish a UI over and over just to make it cool enough. The flip side is a system too complex to manage: I set up a separate atlas and piled ever more documents into the repo just to count how many layers and how many rules there are now, and why each was designed the way it was — and even so, important designs get forgotten (🧩 already taught me that once).
+
+Today was the second lesson, and it hurt more. While building the English version of the frontend and checking block by block that the data had been translated properly, I found a big bug: the price was supposed to be represented in layers at three time resolutions, and at some point the AI had broken it — L2 and L3 had become the same data. In other words, the single most important tactical window, "six months down to two," the AI had been reading all along through the blurry long lens of "two or three years to now" — **doing surgery with a telescope.** I called in the AI council on the spot and had the whole choice of quantitative data argued through and reworked. I'd spent ages studying why it never quite reached mastery — here's hoping the rock pressing down on the ceiling was this one.
+
 ---
 
 Questions and discussion welcome: **sst19910323@gmail.com**
@@ -263,15 +265,11 @@ LLM 教会了我金融，我就天真地以为它天然会交易——结果它�
 
 ## 🧬 这套阵容，是一路吵出来的
 
-最早只有一个 agent，照样追涨杀跌。于是我给它配了个"找茬的"，专门踹它一脚、别让它晃——辩论就这么诞生了。两个 agent 慢慢分了工：一个负责"动"（买和卖），一个负责"拉住"。直到一次失败的黄金策略让我看清：那个交易员其实**不会卖**，方向喊错了也只能被找茬的拉回 HOLD，纠错的天花板就是"别动了"。于是把交易员**人格分裂**成乐观的 Zealot 和算账的 Reaper，纠错才终于能指向另一边。
+最早只有一个 agent，照样追涨杀跌。于是我给它配了个"找茬的"，专门踹它一脚、别让它晃——辩论就这么诞生了。两个 agent 慢慢分了工：一个负责"动"（买和卖），一个负责"拉住"。直到一次失败的黄金策略让我看清：那个交易员其实**不会卖**，方向喊错了也只能被找茬的拉回 HOLD，纠错的天花板就是"别动了"。
 
-## ⚖️ 多头的对面不是空头，是止盈的人
+于是把交易员**人格分裂**。关键在劈的方向：买和卖是两套互斥的心法，塞进同一个 agent，它不会公平地各执一词，而是**最终倒向更强的那一套**（通常是乐观）——立场就这么被悄悄绑架了。所以真正的镜像不是"多头 vs 空头"，而是乐观的 **Zealot** 对上只问"这仓还值不值得留"的 **Reaper**——Reaper 不看跌，他只算账。纠错从此能指向两边。
 
-买和卖是两套互斥的心法。你要是把这两套心法塞进同一个 agent，它不会公平地各执一词，而是**最终倒向更强的那一套**（通常是乐观）——立场就这么被悄悄绑架了。所以系统里真正的镜像不是"多头 vs 空头"，而是把它劈成两个独立人格：乐观的 **Zealot**，和只问"这仓还值不值得留"的 **Reaper**——Reaper 不看跌，他只算账。
-
-## 🚲 看着最乱的辩论，反而最稳
-
-三个 AI 吵得鸡飞狗跳，你以为输出一定是乱的——恰恰相反，它的一致性比"各自安静地想一遍"高得多。**稳定从来不来自静止，来自持续的对抗**：每一方都被另外两方盯着、顶着，谁也没法悄悄跑偏。自行车靠速度站稳，辩论靠对抗收敛。
+反直觉的是，吵得最凶的阵容反而最稳：几个 AI 鸡飞狗跳，输出一致性却比"各自安静地想一遍"高得多。**稳定从来不来自静止，来自持续的对抗**——每一方都被别人盯着、顶着，谁也没法悄悄跑偏。自行车靠速度站稳，辩论靠对抗收敛。
 
 ## ♻️ 1 → 2 → 3，又回到 2
 
@@ -310,21 +308,17 @@ LLM 教会了我金融，我就天真地以为它天然会交易——结果它�
 
 难的是节奏这半边：怎么让它**稳定地"呼吸"**。理想的全自动调度——AI 吵完自己建议下一轮时间、极端行情临时加班——一直卡在两件事上：**额度**（这一阵 codex 消耗巨大，已经撑不起一天一轮），和**盈透重连需要我在场**。中间拿 hermes agent 当过"笨闹钟"，按固定点喊 Claude Code 干活，自动化起来净闹稳定性和权限的幺蛾子。等它完全稳定？等不到。于是折中出一个**半智能模式**：驱动还是手动的，但对话 agent 会先看下一轮时间表、上一轮跑完的时间、剩余 usage 和额度重置信号，替我算出这一次该跑几场。说白了根源是穷——可穷出来的这台调度器，反而先落地了。能稳定运转的系统，背后大多有一段没人看见的"喘不上气"。
 
-## 🧭 连续性要挣，不许继承
-
-每一轮分析都禁止它偷看自己上一轮的报告，必须对着当期真实数据重新定位——否则误差会像惯性导航一样越漂越远。反直觉的是：不许抄，输出却高度连续，因为这份连续性来自市场本身，不来自它对自己历史的复制。
-
 ## 🧧 赛博义和团：写好心法，请祖师爷上身
 
 从第一版起，整部宪法就是**高度凝练的抽象原则——不举例子、不写具体数字、不给某只票某段行情打补丁**。我自己管这套打法叫"赛博义和团"：不教它具体招式，只写一套心法口诀，然后请祖师爷上身、让模型附体去打。听着玄，道理却很实在——一旦开始打补丁，宪法就退化成一张"曾经犯过的错"清单，只在历史重演时才管用；抽象口诀才迁移得动：牛市成立、熊市成立、没见过的行情也成立。
 
 ## 🔧 别恳求模型，雕琢管线
 
-我不灌原始时间序列，先降维成 50 多个指标；盘前盘后那些会误导的字段，直接置成 null。模型是个规格已知的元件，架构的全部职责就是别逼它超规格运行。至于幻觉，提醒一句"克制"就够，别指望它们互相监督——三个醉汉搀不出一条直线。
+模型是个规格已知的元件，架构的全部职责就是别逼它超规格运行。所以我不灌原始时间序列，先降维成 50 多个指标；盘前盘后那些会误导的字段，直接置成 null。至于幻觉，提醒一句"克制"就够，别指望它们互相监督——三个醉汉搀不出一条直线。
 
-## 🏷️ 一个 LLM 架构撞上人类直觉的 bug
+同一个道理管着"喂不喂历史"：每一轮分析都禁止它偷看自己上一轮的报告，必须对着当期真实数据重新定位——否则误差会像惯性导航一样越漂越远。反直觉的是：不许抄，输出却高度连续，因为这份连续性来自市场本身，不来自它对自己历史的复制。**连续性要挣，不许继承。**
 
-有阵子 QQQ 和 SPY 的数值贴得特别近，AI 居然把两者的量化指标搞混了。复盘才反应过来：这是**注意力机制**和**人类直觉**的差别——人看表格会下意识先瞟一眼表头、确认"这列是谁的"；可 AI 是 attention，并不会强制回头核对归属，数值一接近就张冠李戴。解法很朴素也很冗余：给每一个必要的变量都焊上"它属于谁"的前缀标注，让归属在语法层面就根本无从搞混。
+还有一次撞上了 attention 的本性：有阵子 QQQ 和 SPY 的数值贴得特别近，AI 居然把两家的量化指标张冠李戴。人看表格会下意识先瞟一眼表头、确认"这列是谁的"；attention 不会强制回头核对归属。解法很朴素也很冗余：给每一个必要的变量都焊上"它属于谁"的前缀标注，让归属在语法层面就根本无从搞混。管线的活，说到底就是把模型不会自己做的核对，预先焊进数据里。
 
 ## 🃏 它疯了？不，它算到了第五层
 
@@ -362,17 +356,15 @@ BP 自己也踩过坑，最阴的一个是：**后验分数会骗人**。有一�
 
 顺一句：BP 和上面那条"横向取证",其实我 2026 年初就构思好了，当时只是直觉觉得该这么干，后来也果然管用——只是从想到到做出来，隔了大半年。倒不是什么"好设计值得等",说白了就是：这是个一个人**用爱发电**的私人项目，没资源迅速实现，只能挤着时间一件件慢慢磨。
 
-## 📦 辩论的总信息量守恒，模型只决定打包成几轮
-
-达成收敛需要的总信息量大致是定的，模型能力决定的只是把它打包进几轮里。更聪明的 Claude 每轮写得更长，却收敛得更快——"话多"和"轮次少"是同向出现的。所以轮数本身不是质量指标：聪明模型三轮说完的，笨模型可能磨八轮，吐出来的信息量却差不多。
-
 ## 🌡️ 不同的 LLM，各有各的脾气
 
-同一部宪法套在不同模型上，效果能天差地别——因为它们根本是不同的性格：
+先说一条守恒律：达成收敛需要的总信息量大致是定的，模型能力决定的只是把它**打包进几轮**。聪明模型三轮说完的，笨模型可能磨八轮，吐出来的信息量却差不多——所以轮数本身从来不是质量指标。
+
+而同一部宪法套在不同模型上，效果能天差地别——因为它们根本是不同的性格：
 
 - **DeepSeek V3**：一个脑子不太灵、吵急了还会复读的杠精——可偏偏经常一杠就杠到所有人都忽略的真问题（V4 就温和正常多了）。
 - **Qwen-Plus**：一个老好人，对面一施压就滑跪；让它当裁判更离谱，会自己提前宣布"辩论结束"——这就是后来把裁判权从"史官"这个 AI 角色手里彻底没收的直接原因。
-- **Claude**：最聪明，一句顶人家三句，也最印证上一条——能力越强，越是把同样多的信息打包进更少的轮次。
+- **Claude**：最聪明，一句顶人家三句，也最印证开头那条守恒律——能力越强，越是把同样多的信息打包进更少的轮次。
 
 还有个反直觉的小发现：**高温度（temperature）反而更好**——模型更灵活，也没冒出更多幻觉。真正麻烦的是笨模型在低温下：死板、复读、逮谁怼谁，却特别容易被一套漂亮修辞糊弄过去（嘴上最较真，心里最没主见）。
 
@@ -461,6 +453,18 @@ MU 那一期是个标本：它把整条往返路径几乎按数字喊了出来�
 翻上古版本的辩论存档——三月前后、还是三元阵容那会儿——像在读另一个系统：满篇自然语言，带情绪、带定性，"我担心估值"、"明显转弱"，活脱两个人在吵架。后来一路计量化：刻度尺、记账、挂牌、task，到今天的辩论已经是高密度定量——句句带编号、锚点和阈值，严谨是真严谨，可读着也是真累：别说正文，连 summary 都得逐字解码。把模糊话术换成可靠计算的那条路没有走错，只是走到头才发现，顺手把"人能读"也换掉了。
 
 于是在考虑给报告补一个"说人话"的段落。难处在两头：一两句概述已经装不下现在一场辩论的信息量，可整篇正文又密得没法当阅读材料——中间缺一层。真要加，有条边界得守死：这一段只许翻译、不许再创作——它要是开始自己发挥，当年好不容易用挂牌定价赶走的裸修辞，就从后门溜回来了。还没定，先记在这。开篇那句总纲是"会说，不等于会做"；一年下来，它倒是越来越会做，却快不会说了。
+
+## 🩼 一根拐棍的退役
+
+今天正式把前端右上角那个从上古版本就在的"复制本页"按钮摘了。它的一生正好是这套系统的信任曲线。最早的用法说出来有点不好意思：那会儿的 AI 不靠谱到我主要拿它复制**量化数据**，整包扔给当时更强的 Gemini、Claude，主要听它们的——系统自己的产出只配当草稿。后来升级成复制**整份报告**：结论已经值得当重要参考了，拿去给 Claude 们过目，求个第二意见。
+
+再后来发现，顶级模型当场看一眼，已经**判不动**这套报告的质量了——能分出好坏的只剩事后复盘，而复盘也得按规矩来（对齐波动率、先度量再动机制那些）；产出的质量也稳了，一册册复盘自己会说话。按钮于是闲置了很久，今天动手摘的时候才想明白：**拐棍不是被扔掉的，是先在不知不觉里被忘掉的。** 一个功能的退役，比它的上线更能标记系统长到了哪。
+
+## 🔭 拿望远镜做手术：打磨界面时捡到的大 bug
+
+从 2025 年 10 月到今天，我算是亲历了 AI agent 成熟的全过程：最早自己搭架构、跟网页版 AI 一来一回复制粘贴；后来整个工程交给 agent 托管；前几天更进一步——为了避免单个 agent 的思维惯性，Claude 可以当场呼唤 GPT 和 Gemini 开议事会。开发效率前所未有，有时候闲到反反复复打磨一个 UI 够不够酷。可另一面是系统复杂到难以管理：我单独立了个 atlas、在工程里堆了越来越多的文档，就为了数清楚现在到底有多少层、多少条规则、当初为什么这么设计——饶是如此，重要的设计还是会被遗忘（🧩 已经领教过一次）。
+
+今天是第二次领教，而且更疼。给前端做英文版、逐块检查数据有没有翻到位的时候，发现一个大 bug：股价本该用三个时间分辨率分层表征，不知道什么时候被 AI 改坏了——L2 和 L3 成了同一份数据。也就是说，"半年到两个月"这个最关键的战术窗口，AI 一直拿"两三年到现在"的模糊长镜头在看——**拿望远镜做手术**。顺手把 AI 议会喊来，把量化数据的选择整个讨论优化了一遍。研究了半天它为什么迟迟不能神功大成——但愿压住天花板的，就是这块石头。
 
 ---
 
