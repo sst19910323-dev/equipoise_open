@@ -1,0 +1,34 @@
+Use the imagegen tool. Create a NEW wide infographic PNG (1536x1024), a project timeline in a fresh style — NOT the old card-per-milestone layout. Style: a clean "metro map" / river timeline on a white background; one continuous line that runs in two or three gentle horizontal rows (serpentine, left to right, then down and left to right again) so sixteen stations fit without crowding; the line changes colour by era (four coloured bands with a small era label above each segment); each station is a small circle on the line with a date above it and a short bold label plus one grey sub-line below; thin line-art icons only where room allows; typography clean sans-serif, navy headings, muted blue/teal/green/orange band colours. Everything legible, nothing cut off, no decorative clutter.
+
+Heading at top: "EQUIPOISE" (large, navy). Subtitle: "Evolution of Decision Architecture (2025–2026)". Small third line: "From a single trading agent to a self-improving multi-agent parliament".
+
+Era bands and stations, in order:
+
+Era 1 — "BETA · single agent to two roles" (grey-blue)
+1. Oct 2025 — "Arrogant Amateur" — one trading agent; confident but fragile
+2. Nov 2025 — "Adversarial Imitation" — first challenge agent; analyst vs. reflection
+3. Dec 2025 — "The Gold Trade Failure" — risk ≠ bearish; the trader couldn't sell
+
+Era 2 — "v1.0 · the three-debater parliament" (teal)
+4. Jan 2026 — "Round Table" — Zealot / Reaper / Fulcrum; three-sided debate under a constitution
+5. Apr 2026 — "Separation of Concerns" — charters; memory separated from decisions; audit layer
+6. Jun 2026 — "Evidence Before Answers" — agents fetch evidence first; Postgres; the server
+7. Jul 2026 — "Closed-Loop Learning (BP)" — postcheck scores every call; lessons flow back into the rules
+
+Era 3 — "v2.0 · two advocates + an arbiter" (green)
+8. Late Jul 2026 — "Fulcrum Retired" — two advocates and an arbiter; concession gated on verified evidence
+9. Aug 2026 — "Priced Ledger & Tasks" — pillars staked before the outcome; mantra vs. playbook; work orders to neutral runners
+10. Sep 2026 — "Balance Passes" — paired buy/sell rules; HOLD pays the same toll; limit orders priced by odds
+
+Era 4 — "v3.x · the rebuild, now Equipoise" (orange)
+11. 2026-09-30 — "Layered Rebuild Begins" — Claude × Codex consultation; one judgment chain, one rule tree
+12. 2026-10-02 — "v3.0 in Production" — reports in beats; arbiter silent, then draft ruling + objections
+13. 2026-10-07 — "Name Chosen: Equipoise（均势）" — balance under hard contention
+14. 2026-10-17 — "v3.2 · Rename Decided" — order horizons decoupled; the project is formally Equipoise
+15. 2026-10-23 — "Rename Lands Everywhere" — server path, database, repos, dashboard all Equipoise
+16. 2026-10-26 — "English Core" — rules, debates, reports and verdicts in English; translations downstream
+
+At the bottom right, a small compact legend box titled "Cognitive Evolution" listing in one line with arrows: Think → Challenge → Debate → Remember → Research → Learn → Simplify → Delegate → Restructure → Rename.
+Render the Chinese characters 均势 correctly. English otherwise. Everything inside the canvas.
+
+Save the generated image to D:/PycharmProjects/equipoise_open/images/timeline-v3.png (overwrite if present). Do not modify any other file. Reply with the saved path only.

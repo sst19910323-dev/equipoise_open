@@ -169,15 +169,17 @@ The original edition — three debaters (Zealot / Reaper / **Fulcrum**) + a sepa
 
 The cast's headcount tells the first arc — one overconfident agent → two → three → and back to two. The rest of the story is what layered on top: a **reckoner + BP loop** that trains the system on its own hindsight, the **task mode** now gradually taking shape (debate ⊃ task ⊃ evidence), and the shift off a self-built **API stack** onto **agent-native** runners (Claude Code / GPT Codex).
 
-In version terms: **Beta** (the undocumented single-agent and two-role days) → **v1.0** (the three-debater parliament, until 2026-07-18) → **v2.0** (two advocates + an arbiter, last production batch 2026-09-29) → **v3.0** (the ground-up rebuild, started 2026-09-30, in production since 10-02; v3.1 on 10-08, v3.2 on 10-17).
+In version terms: **Beta** (the undocumented single-agent and two-role days) → **v1.0** (the three-debater parliament, until 2026-07-18) → **v2.0** (two advocates + an arbiter, last production batch 2026-09-29) → **v3.0** (the ground-up rebuild, started 2026-09-30, in production since 10-02; v3.1 on 10-08, v3.2 on 10-17, v3.3 on 10-25).
 
 The latest milestones:
 
 - **2026-09-30** — Enough small releases had piled up that a layered structure had formed on its own. The rebuild of the complete trading-cognition system began, following that naturally-formed layering rather than a diagram drawn in advance.
 - **2026-10-07** — The name "Apex Quant," suggested by Gemini when all I could say was "I want to do LLM quant," no longer fit a project that had grown a style of its own. The real name was settled: **Equipoise（均势）** — balance under hard contention. The rename itself waited until everything could change at once.
-- **2026-10-17** — Everything changes at once: the working repo becomes `equipoise`, this mirror `equipoise_open`, the dashboard *Equipoise Dash*. The same day v3.2 goes live.
+- **2026-10-17** — v3.2 goes live, and the project is formally renamed **Equipoise**; the repositories and the server follow over the next week.
+- **2026-10-23** — The rename lands everywhere: server path, database, the working repo `equipoise`, this mirror `equipoise_open`, the dashboard *Equipoise Dash*.
+- **2026-10-26** — English becomes the core language (v3.3): rules, debates, reports and verdicts are written in English; Chinese is rendered by a translation step for reports and verdicts.
 
-![timeline](images/timeline-v2.png)
+![timeline](images/timeline-v3.png)
 
 </details>
 
@@ -354,15 +356,17 @@ BP = **反向传播**：辩论是前向推理，后验是对真实标签算误�
 
 阵容的人数是故事的前半段——一个过度自信的单 agent → 两个 → 三个 → 又收回两个。后半段是层层叠上去的东西：一个让系统用自己"事后诸葛"训练自己的 **reckoner + BP 闭环**、如今逐渐成形的 **task 模式**（辩论 ⊃ task ⊃ evidence），以及从自搭的 **API 版**转向 **agent 原生**运行版（Claude Code / GPT Codex）。
 
-按大版本算：**Beta**（没留下详细记录的单 agent 与双角色草创期）→ **v1.0**（三辩手议会，到 2026-07-18）→ **v2.0**（两位辩手 + 一位仲裁者，最后一批生产场 2026-09-29）→ **v3.0**（推倒重来的整体重建，2026-09-30 开工，10-02 起在生产运行；v3.1 10-08，v3.2 10-17）。
+按大版本算：**Beta**（没留下详细记录的单 agent 与双角色草创期）→ **v1.0**（三辩手议会，到 2026-07-18）→ **v2.0**（两位辩手 + 一位仲裁者，最后一批生产场 2026-09-29）→ **v3.0**（推倒重来的整体重建，2026-09-30 开工，10-02 起在生产运行；v3.1 10-08，v3.2 10-17，v3.3 10-25）。
 
 最新的几个节点：
 
 - **2026-09-30** —— 小版本更新积累下来，一个分层的结构已经自然形成。于是开始按照这个自然形成的分层，完整重构整套交易认知体系。
 - **2026-10-07** —— 当初跟 Gemini 3 说"要做 LLM 的量化"时还没做出自己的风格，它起的 "Apex Quant" 已经不像这套系统真正的样子。正式名字定下：**Equipoise（均势）**——激烈交锋之下的均衡。改名本身等到所有地方能一起换的那天。
-- **2026-10-17** —— 所有地方一起换：工作仓库改名 `equipoise`，这个镜像改名 `equipoise_open`，看板改名 *Equipoise Dash*。同一天 v3.2 上线。
+- **2026-10-17** —— v3.2 上线，项目正式更名 **Equipoise**；仓库和服务器在随后一周里陆续跟进。
+- **2026-10-23** —— 改名落到所有地方：服务器路径、数据库、工作仓库 `equipoise`、这个镜像 `equipoise_open`、看板 *Equipoise Dash*。
+- **2026-10-26** —— 英文成为核心语言（v3.3）：规则、辩论、报告、判词的原文都是英文；中文由翻译步从报告与判词渲染。
 
-![timeline](images/timeline-v2.png)
+![timeline](images/timeline-v3.png)
 
 </details>
 
