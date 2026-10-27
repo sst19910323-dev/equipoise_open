@@ -29,6 +29,8 @@ Equipoise is an LLM-based multi-agent framework for quantitative analysis. Befor
 
 ## 🚧 October 2026: the v3.0 rebuild
 
+![v3 flow](images/flowchart-v3.png)
+
 **Why now.** Nobody designed this system top-down. It grew: an ensemble one day, role stances the next, then evidence and task split into two layers, then principles separated from playbooks. What came out is clearly layered but rough — and patching it further had stalled: round after round of surgery left the post-mortem average in the same 70 band. A rough shape that already exists is exactly what makes a real top-level design possible for the first time (the 🪴 entry in the [design philosophy](docs/design-philosophy.md) is about this). So instead of another patch, the whole rule corpus and its orchestration are being **rebuilt**: the old version is tagged, its last production batch (2026-09-29) is the baseline, and the target is a post-mortem average above 80.
 
 **How.** As a consultation between two AIs. Claude Code and GPT Codex each drafted a plan independently, reviewed the other's, and I ruled on the disagreements.
@@ -220,6 +222,8 @@ Equipoise 是一个基于大语言模型的多智能体量化分析框架。在�
 <a id="v3-重建"></a>
 
 ## 🚧 2026 年 10 月：v3.0 整体重建
+
+![v3 流程](images/flowchart-v3.png)
 
 **为什么是现在。** 这套系统从来不是自上而下设计出来的，它是长出来的：今天加 ensemble，明天设计角色立场，后天把 evidence 和 task 拆成两层，再后来把原则和招式分开。长出来的东西层次分明，但粗糙——而继续打补丁已经打不动了：一轮又一轮的手术之后，复盘均分始终停在 70 档。可恰恰是有了这个雏形，真正的顶层设计才第一次成为可能（[设计哲学](docs/design-philosophy.md)里的 🪴 一条讲的就是这个）。所以这次不再打补丁，而是把整套规则语料和编排**推倒重建**：旧版打了 tag，最后一批生产场（2026-09-29）作基线，目标是复盘均分站上 80。
 

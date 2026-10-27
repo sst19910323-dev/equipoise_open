@@ -9,7 +9,7 @@
 
 In one line: **a cast of differently-tempered AIs argues over real market data every day, and argues its way to a single BUY / HOLD / SELL.**
 
-![architecture](../images/architecture-v2.png)
+![architecture](../images/architecture-v3.png)
 
 Two advocates argue on stage: the bull **Zealot** and the profit-taking **Reaper**. An **Arbiter** presides — stamping evidence, keeping the priced ledger of concessions, setting each round's agenda, and writing the final record (it took over the old Chronicler's archivist job); it holds no stance of its own, but its ruling must follow the ledger — while a corps of neutral **Scouts** is dispatched on demand to fetch evidence for either side. *(An earlier third pole, the damper **Fulcrum**, has since been retired — see ♻️ below for the data that changed my mind.)* The debaters share no memory with each other, and re-fix their bearings against the current real data every round; the whole argument is archived, so you can walk back through it step by step and audit it.
 
@@ -29,9 +29,9 @@ LLMs taught me finance, so I naively assumed they could trade by nature — inst
 
 At first there was just one agent — and it chased pumps and dumps all the same. So I gave it a "heckler," whose only job was to kick it and keep it from drifting — and that's how the debate was born. The two agents gradually split duties: one handled "action" (buy and sell), the other "holding back." Until a failed gold play made it clear: that trader actually **couldn't sell** — call the direction wrong and the best the heckler could do was drag it back to HOLD; the ceiling on error-correction was "just stop."
 
-So I split the trader's personality. The direction of the cut was the key: buying and selling are two mutually exclusive states of mind; stuff both into one agent and it won't argue each fairly — it ends up **leaning toward whichever is stronger** (usually optimism), and the stance gets quietly hijacked. So the real mirror isn't "bull vs. bear" — it's the optimistic **Zealot** against the **Reaper** who only asks "is this position still worth keeping?" Reaper isn't bearish; he's just doing the math. From then on, correction could point both ways.
+So I split the trader's personality. What mattered was the direction of the cut: buying and selling are two mutually exclusive states of mind — stuff both into one agent and it won't argue each fairly, it ends up **leaning toward whichever is stronger** (usually optimism), and the stance gets quietly hijacked. So the real mirror isn't "bull vs. bear": it's the optimistic **Zealot** against the **Reaper** who only asks "is this position still worth keeping?" — Reaper isn't bearish, he's just doing the math. From then on, correction could point both ways.
 
-Counterintuitively, the cast that squabbles hardest is the steadiest: several AIs going at it hammer and tongs, yet the output's consistency is far higher than "each one quietly thinks it through alone." **Stability never comes from stillness; it comes from sustained opposition** — each side is watched and pressed by the others, so no one can quietly veer off. A bicycle stays up by speed; a debate converges by opposition.
+The counterintuitive part: the cast that argues hardest is the steadiest. AIs squabbling like mad, yet the output's consistency is far higher than "each one quietly thinks it through alone." **Stability never comes from stillness; it comes from sustained opposition** — each side is watched and pressed by the others, so no one can quietly veer off. A bicycle stays up by speed; a debate converges by opposition.
 
 ## ♻️ 1 → 2 → 3, and back to 2
 
@@ -48,7 +48,7 @@ The cast's headcount came full circle: **1 → 2 → 3 → back to 2.**
 
 The bottom line: **the pivot was a crutch fitted for "a dim model + limited data + crude rules." Once all three were upgraded, the crutch cost more than it was worth, so off it came.**
 
-![flowchart](../images/flowchart-v2.png)
+![flowchart](../images/flowchart-v3.png)
 
 ## 🔦 Getting an AI to "find the thing it itself wants to find" is surprisingly hard
 
@@ -76,11 +76,11 @@ From the very first version, the whole constitution has been **highly distilled 
 
 ## 🔧 Don't beg the model — sculpt the pipeline
 
-The model is a component with known specs, and the architecture's whole job is to not push it past spec. So I don't pour in raw time series; I first reduce it to 50-odd indicators; fields that would mislead during pre/post-market I just null out. As for hallucination, a single reminder to "restrain yourself" is enough — don't count on them supervising each other: three drunks can't prop up a straight line.
+The model is a component with known specs, and the architecture's whole job is to not push it past spec. So I don't pour in raw time series — I reduce it to 50-odd indicators first; fields that would mislead during pre/post-market get nulled outright. As for hallucination, a single reminder to "restrain yourself" is enough — don't count on them supervising each other: three drunks can't prop up a straight line.
 
-The same principle governs "whether to feed it history": every round of analysis is forbidden from peeking at its own previous report; it must re-fix its bearings against the current real data — otherwise error drifts ever further, like inertial navigation. The counterintuitive part: forbidden from copying, the output is nonetheless highly continuous — because that continuity comes from the market itself, not from the model copying its own history. **Continuity must be earned, never inherited.**
+The same logic governs whether to feed it history: every round of analysis is forbidden from peeking at its own previous report; it must re-fix its bearings against the current real data — otherwise error drifts ever further, like inertial navigation. The counterintuitive part: forbidden from copying, the output is nonetheless highly continuous, because that continuity comes from the market itself, not from the model copying its own history. **Continuity must be earned, never inherited.**
 
-Another time I ran into the nature of attention itself: for a while QQQ's and SPY's numbers sat very close together, and the AI actually swapped the two's quantitative indicators. A person reading a table instinctively glances at the header first to confirm "whose column is this?"; attention won't compulsively double back to verify ownership. The fix is plain and redundant: weld onto every necessary variable a prefix marking "whom it belongs to," so ownership becomes impossible to confuse at the syntactic level. Pipeline work, at bottom, is welding into the data in advance the checks the model won't do for itself.
+And once, we ran straight into the nature of attention itself: for a while QQQ's and SPY's numbers sat very close together, and the AI actually mixed up the two's quantitative indicators. A person reading a table instinctively glances at the header first — "whose column is this?"; attention won't compulsively double back to verify ownership. The fix is plain and redundant: weld onto every necessary variable a prefix marking "whom it belongs to," so ownership becomes impossible to confuse at the syntactic level. Pipeline work, at bottom, is welding into the data the checks the model will never do for itself.
 
 ## 🃏 It went crazy? No — it computed to the fifth level
 
@@ -120,13 +120,13 @@ One aside: BP and the lateral-evidence idea above were both sketched back in ear
 
 ## 🌡️ Different LLMs each have their own temperament
 
-First, a conservation law: the total information needed to converge is roughly fixed; model capability only decides **how many rounds it gets packed into**. What a smart model says in three rounds, a dim one might grind out over eight, and the information emitted is about the same — so round count itself was never a quality metric.
+Start with a conservation law: the total information needed to converge is roughly fixed; model capability only decides **how many rounds it gets packed into**. What a smart model says in three rounds, a dim one might grind out over eight, and the information emitted is about the same — so round count was never a quality metric.
 
-And the same constitution on different models gives wildly different results — because they're genuinely different personalities:
+Meanwhile the same constitution on different models gives wildly different results — because they're genuinely different personalities:
 
 - **DeepSeek V3**: a not-too-bright contrarian who starts parroting himself once the argument drags on — yet who often, with one jab, hits the very problem everyone else overlooked (V4 mellowed out a lot).
 - **Qwen-Plus**: a people-pleaser who caves the moment the other side pushes; worse as a judge, where it declares the debate over early on its own — the direct reason the judging power was later stripped entirely from the AI "Chronicler" seat.
-- **Claude**: the smartest, one sentence doing the work of three, and the best proof of the conservation law above — the stronger the model, the more it packs the same information into fewer rounds.
+- **Claude**: the smartest, one sentence doing the work of three, and the best proof of that conservation law above — the stronger the model, the more it packs the same information into fewer rounds.
 
 There's also a counterintuitive little finding: **higher temperature is actually better** — the model is more flexible, and no extra hallucinations show up. The real trouble is a dim model at low temperature: rigid, parroting, picking fights with everyone, yet especially easy to fool with a stretch of pretty rhetoric (loudest in nitpicking, emptiest in conviction).
 
@@ -172,7 +172,7 @@ This also corrects an earlier verdict of mine: "to a dim model the constitution 
 
 ## 🎫 The debater stops fighting solo — it files a work order
 
-![debate-and-task architecture](../images/debate_task_architecture.png)
+![outcalls: data, search, model call](../images/outcalls-v3.png)
 
 An inversion I'd had backwards: I kept treating **evidence** as the thing the debate was chasing — go find the fact, bring it back. But finding a fact was never the point; the point was always to settle one small, specific **question**. So the first-class citizen isn't the evidence — it's the **task**: a work order that asks one question and comes back with an answer. Evidence dropped a rank, to *a task's output* — a leaf, not the tree.
 
@@ -216,19 +216,20 @@ Reading the ancient debate archives — around March, back in the three-debater 
 
 So I'm considering adding a plain-language passage to the report. The difficulty sits at both ends: a sentence or two of summary can no longer hold the information a debate now carries, while the full body is too dense to serve as reading material — there's a missing layer in between. If it goes in, one boundary has to be held absolutely: that passage may only *translate*, never *compose* — the moment it starts improvising, the bare rhetoric that staked pricing finally drove out comes back in through the back door. Undecided; noted here. The opening line of these notes was "talking isn't doing." A year on, it does better and better — and can nearly no longer talk.
 
-## 🩼 Retiring a crutch
-
-Today I formally removed the "copy this page" button that had sat in the top-right corner of the frontend since the ancient versions. Its lifetime is exactly this system's trust curve. The earliest use is a little embarrassing to admit: back then the AI was unreliable enough that I mostly used the button to copy the **quantitative data**, dump the whole bundle on the stronger Gemini and Claude of the day, and mostly listen to them — the system's own output barely rated as a draft. Later it graduated to copying the **whole report**: the conclusions were worth taking as a serious reference by then, so I'd hand them to the Claudes for a second opinion.
-
-Later still, I found that a top model glancing at a report on the spot could **no longer judge** its quality — the only thing that could still tell good from bad was the post-mortem after the fact, and even that had to follow the rules (align volatility, measure before touching the mechanism, and so on); meanwhile the output's quality had steadied, and the post-mortem volumes spoke for themselves, one after another. So the button sat idle for a long time, and only when I reached to remove it today did I understand: **a crutch isn't thrown away — it's first forgotten, without anyone noticing.** A feature's retirement marks how far a system has grown better than its launch ever did.
-
-## 🔭 Surgery with a telescope: the big bug I picked up while polishing the UI
-
-From October 2025 to today I've lived through, more or less, the whole maturing of AI agents: at first building the architecture myself and copy-pasting back and forth with a web chat; then handing the whole project over to agents to run; and a few days ago one step further — to avoid any single agent's habits of mind, Claude can now summon GPT and Gemini on the spot and convene a council. Development has never been this fast; sometimes there's enough slack to polish a UI over and over just to make it cool enough. The flip side is a system too complex to manage: I set up a separate atlas and piled ever more documents into the repo just to count how many layers and how many rules there are now, and why each was designed the way it was — and even so, important designs get forgotten (🧩 already taught me that once).
-
-Today was the second lesson, and it hurt more. While building the English version of the frontend and checking block by block that the data had been translated properly, I found a big bug: the price was supposed to be represented in layers at three time resolutions, and at some point the AI had broken it — L2 and L3 had become the same data. In other words, the single most important tactical window, "six months down to two," the AI had been reading all along through the blurry long lens of "two or three years to now" — **doing surgery with a telescope.** I called in the AI council on the spot and had the whole choice of quantitative data argued through and reworked. I'd spent ages studying why it never quite reached mastery — here's hoping the rock pressing down on the ceiling was this one.
-
 ---
+
+## 🩼 A crutch retires
+
+Today I formally removed the "copy this page" button that had sat in the frontend's top-right corner since antiquity. Its lifespan traces this system's curve of trust. Its earliest use is a little embarrassing to admit: back then the AI was unreliable enough that I mainly used the button to copy the **quantitative data**, dump the lot on the stronger models of the day — Gemini, Claude — and mostly take their word; the system's own output barely rated as a draft. Later it was upgraded to copying the **full report**: the conclusions had become worth treating as serious reference, carried over to the Claudes for a second opinion.
+
+Later still I found that a top model, eyeballing a report on the spot, could **no longer judge** its quality — the only thing that separates good from bad anymore is the post-mortem, and the post-mortem has rules of its own (align the volatility regime; measure before you re-engineer); the output had steadied too, and the review volumes speak for themselves. So the button sat idle for a long while, and only in removing it today did I see it clearly: **a crutch isn't thrown away — it gets forgotten first, without anyone noticing.** A feature's retirement marks how far a system has grown better than its launch ever did.
+
+## 🔭 Surgery through a telescope: the big bug found while polishing the UI
+
+From October 2025 to today I've lived through the whole maturation of AI agents: at first I built the architecture myself and ping-ponged with web AIs by copy-paste; then the whole project went under agent management; and a few days ago, one step further — to break a single agent's inertia of thought, Claude can now summon GPT and Gemini into a council on the spot. Development speed is unprecedented — some days I'm idle enough to keep polishing whether a UI looks cool or not. The other side: the system has grown complex almost past managing. I stood up a separate atlas and piled ever more docs into the project just to count how many layers and rules there are by now and why they were designed that way — and even so, important designs still get forgotten (🧩 taught me that once already).
+
+Today was the second lesson, and it hurt more. While building the English UI and checking, block by block, that every piece of data was covered, I found a serious bug: the stock price is supposed to be represented at three time resolutions — and at some unknown point an AI had broken it, leaving L2 and L3 identical. Which means the most critical tactical window — six months down to two months — had been viewed all along through the blurry long lens of "two or three years to now." **Surgery through a telescope.** I summoned the AI council on the spot and had it rework the quant-data selection end to end. After all this time wondering why the system never quite attains mastery — here's hoping this was the stone pressing down the ceiling.
+
 
 Questions and discussion welcome: **sst19910323@gmail.com**
 
@@ -247,7 +248,7 @@ Questions and discussion welcome: **sst19910323@gmail.com**
 
 一句话：**一群性格各异的 AI，每天对着真实市场数据吵一架，吵出一个 BUY / HOLD / SELL。**
 
-![架构](../images/architecture-v2.png)
+![架构](../images/architecture-v3.png)
 
 台上两位辩手：多头 **Zealot** 和止盈的 **Reaper**。一位 **Arbiter（仲裁者）** 主持——给证据盖章、管着那本标了价的退让账、每轮定议程、并写最终记录（接管了原来史官的存档活儿）；它没有自己的立场，但终裁必须跟着账本走；另有一队中立的 **Scout（取证员）** 按需派出、为两边取证。*（早先还有第三极、当阻尼器的支点 **Fulcrum**，如今已退役——为什么见下面的 ♻️。）* 辩手之间不共享记忆、每一轮都重新对着当期真实数据定位；吵完的全过程都存档，可以一步步走回去审计。
 
@@ -286,7 +287,7 @@ LLM 教会了我金融，我就天真地以为它天然会交易——结果它�
 
 说到底：**支点是给"笨模型 + 有限数据 + 粗规则"配的拐杖，三样都升级后，代价盖过用处，就该拆。**
 
-![流程](../images/flowchart-v2.png)
+![流程](../images/flowchart-v3.png)
 
 ## 🔦 让 AI"搜到它自己想发现的东西"，出奇地难
 
@@ -410,7 +411,7 @@ BP 自己也踩过坑，最阴的一个是：**后验分数会骗人**。有一�
 
 ## 🎫 辩手不再单打独斗——它开一张工作单
 
-![辩论与 task 架构](../images/debate_task_architecture.png)
+![三类外呼：数据、搜索、模型调用](../images/outcalls-v3.png)
 
 有个倒装我一直搞反了：我总把**证据**当成辩论追逐的东西——去把事实找回来。可找到一个事实从来不是目的，目的始终是把一个具体的小**问题**结算掉。所以一等公民不是证据，是 **task**：一张只问一个问题、带着答案回来的工作单。证据降了一级，成了 *task 的产出*——是叶子，不是那棵树。
 

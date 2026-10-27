@@ -1,0 +1,14 @@
+Use the imagegen tool. The attached image is the previous version of this flowchart (Apex Quant v2) and is the STYLE REFERENCE: keep the same clean editorial line-art style, white background, numbered rounded panels left to right, navy/blue headings, green for the optimist advocate (Zealot) and red for the realist advocate (Reaper), the arbiter at a bench, and the dashed feedback loop along the bottom. Produce a NEW landscape PNG (1536x1024) with the flow updated to the current protocol, named EQUIPOISE. No "Apex Quant" anywhere.
+
+Panels, left to right:
+1. "DATA PREP" — icons for candlesticks, news, database; caption "one shared snapshot; price structure at three resolutions; trigger signals".
+2. "OPENING REPORTS" — the two advocates each writing; caption "each side files a cited report and stakes 2–4 priced pillars; no communication".
+3. "ROUNDS, IN BEATS" (large panel with a loop arrow) — inside: Zealot and Reaper at desks; a small loop labeled "beat: file outcalls → executors return → final draft"; three small executor desks labeled "DATA CALL", "SEARCH", "MODEL CALL"; a ledger board labeled "LEDGER: settlement = the staked price"; the arbiter at the bench with the caption "silent on substance · tallies the ledger · names the next issue".
+4. "RULING" — show a short vertical chain of five small boxes: "first pass: ruling sheet" → "second pass: ledger audit" → "PROPOSED ruling published" → "objection rounds (up to 2)" → "redraft + signoff with dissent". Caption: "composite score 0–100 · operation · mentality · short-term path".
+5. "FACTORY GATE" — a small gate/checkpoint icon; caption "format & ledger arithmetic only; behavioural smells go to forensics, never into the running debate".
+6. "POSTCHECK" — calendar "DAY 0 → DAY 3 / DAY 20" and a price chart with magnifier; caption "scored against real prices: 0 whiff / 50 miss / 100 hit; the chosen operation settled side by side with its alternatives".
+Bottom dashed feedback arrow from panel 6 back to panel 1, labeled "BP loop: post-mortem volume names the disease → the next round treats it; acceptance sentinels written before deployment".
+A tiny footer note on the right: "working language: English core; reports translated downstream".
+Keep it legible and uncluttered; English only; everything inside the canvas.
+
+Save the generated image to D:/PycharmProjects/equipoise_open/images/flowchart-v3.png (overwrite if present). Do not modify any other file. Reply with the saved path only.

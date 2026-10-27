@@ -1,0 +1,14 @@
+Use the imagegen tool. The attached image is the previous version of this diagram (Apex Quant v2) and is the STYLE REFERENCE: keep the same clean editorial line-art illustration style, white background, navy/blue labels, red for the realist side and green for the optimist side, the tug-of-war composition over a 0-100 scale, the arbiter's bench at the top, the evidence staff at the top right. Produce a NEW landscape PNG (1536x1024) with the content updated to the current architecture, named EQUIPOISE. No "Apex Quant" anywhere.
+
+Content to show:
+- Title band at top: "EQUIPOISE — THE CHAMBER" with a small subtitle "two advocates · one pricer · neutral executors".
+- Left advocate (red): label "REAPER — realist advocate" with a small caption "takes profit; asks: is this position still worth keeping?".
+- Right advocate (green): label "ZEALOT — optimist advocate" with caption "builds the strongest long case".
+- Both pull a rope over the scale at the bottom. Relabel the scale "COMPOSITE SCORE 0–100 · 50 = neutral" (left end "0", right end "100"; no "Bearish/Bullish" words).
+- Arbiter at the top bench: label "ARBITER — the pricer". Caption in two short lines: "silent on substance while they argue; keeps the priced ledger" and "rules by whoever has the case; mid-band only for a true stalemate; may not mediate".
+- On the bench, replace the three stamps with four small result tags in a row: "CONFIRMED", "REFUTED", "PARTLY HOLDS", "NOT FOUND", and a tiny note under them "verification = facts only, with a stated scope".
+- Center board between the advocates: title "THE LEDGER", showing a short list of numbered pillars "Z1 · stake 6", "R1 · stake 5", "Z2 · stake 3" with a caption "pillars priced before the outcome is known; settlement moves exactly the staked price".
+- Top right staff area: label "EXECUTORS — neutral". Three small desks labeled "DATA CALL (IBKR)", "SEARCH", "MODEL CALL (runs a model manual)". Caption: "serve either side on request; results may cut against whoever asked".
+- Keep the illustration uncluttered and all text legible; English only; everything inside the canvas.
+
+Save the generated image to D:/PycharmProjects/equipoise_open/images/architecture-v3.png (overwrite if present). Do not modify any other file. Reply with the saved path only.

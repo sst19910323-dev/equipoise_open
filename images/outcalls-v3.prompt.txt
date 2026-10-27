@@ -1,0 +1,12 @@
+Use the imagegen tool. The attached image is the previous version of this diagram (Apex Quant — Debate & Task Architecture) and is the STYLE REFERENCE: keep the same editorial infographic style — courtroom scene at the top left, a data-structure tree panel at the bottom left, a worked example flow on the right, muted navy/green/red palette, thin outlined panels, legible labels. Produce a NEW landscape PNG (1536x1024) with the content updated to the current design, named EQUIPOISE. No "Apex Quant", no "bull team / bear team", no "judge", no "task" wording — the current word is MODEL CALL.
+
+Content:
+- Title band: "EQUIPOISE — OUTCALLS: DATA · SEARCH · MODEL CALL".
+- Top-left courtroom: left side labeled "ZEALOT — optimist" (green), right side labeled "REAPER — realist" (red), the bench labeled "ARBITER — pricer". Under the scene a box "ISSUE DOCKET": "issues are the units of the debate; each carries priced pillars (Z1 · R1 …)".
+- Bottom-left tree panel titled "DATA STRUCTURE": DEBATE → ISSUE #1, ISSUE #2 … → under an issue: "PILLAR (staked)" → "OUTCALLS" → leaves "EVIDENCE" items. Small note: "a verified result pins one claim; it does not close the issue".
+- Right side, a panel "THREE KINDS OF OUTCALL": three columns with icons — "DATA CALL — IBKR, seven modes (bars, peers, relative strength, economic series, event calendar…)", "SEARCH — web, the cause and effect of a news item", "MODEL CALL — a neutral executor runs a MODEL MANUAL (event pricing, participation & flow, price & trend, peer compare, pair link…) and returns legs, finding, verdict with scope".
+- Below it, a worked example flow: a debater speech bubble "Price the tariff shock through to CPI — run the event-pricing manual" → arrow "MODEL CALL MC-3" → an executor at a desk with three screens "INPUTS / MANUAL STEPS / RESULT" → a result card "MC-3 RESULT: finding (3–5 sentences, key numbers) · verdict: PARTLY HOLDS · scope: facts confirmed vs inferred" → arrow back to the ledger labeled "earns a top-tier card only if confirmed; bare assertion = lowest tier".
+- Bottom strip titled "WHY OUTCALLS?" with three icons and captions: "NEUTRALITY — the result may cut against the side that asked", "STRENGTH = EXECUTION RESULT, not the volume of the voice", "RESTRAINT — not everything becomes a model call; a single number stays direct evidence".
+Keep everything legible and inside the canvas; English only.
+
+Save the generated image to D:/PycharmProjects/equipoise_open/images/outcalls-v3.png (overwrite if present). Do not modify any other file. Reply with the saved path only.
