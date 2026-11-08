@@ -110,7 +110,7 @@ The post-mortem still doesn't need the debate's adversarial machinery: the deter
 
 BP is **backpropagation**, from neural nets — I named this self-improvement mechanism the "BP plan" as exactly that analogy.
 
-The reason is mundane: the reports are now long and professional, and I can barely — and have no time to — read each one closely. So how do I know if it's any good, and where it's wrong? The answer is to **wait** — for post-mortem data. Days after a report goes out, the market gives the real answer; I have an AI take that answer and **review each report in detail**, then **abstract the recurring flaws across many reviews into common problems**, and finally **feed that "gradient" back** to adjust prompts and architecture.
+The reason is mundane: the reports are now long and professional, and I can barely — and have no time to — read each one closely. So how do I know if it's any good, and where it's wrong? The classic quant backtest — change a parameter, rerun history, read the statistics — doesn't work here: each period is far too big, and with live search wired in it can't be replayed as it was. So the answer can only be to **wait** — for post-mortem data. Days after a report goes out, the market gives the real answer; I have an AI take that answer and **review each report in detail**, then **abstract the recurring flaws across many reviews into common problems**, and finally **feed that "gradient" back** to adjust prompts and architecture.
 
 That is backpropagation: the debate is the forward pass, the post-mortem computes error against the real label, the review abstracts that error into a gradient, and editing the constitution and architecture is the weight update. Except the "gradient" here isn't a number but a lesson distilled by an AI; the "weights" aren't a matrix but that constitution and this architecture. **Removing the pivot and rewriting the Bayesian rule were the first batch of big updates BP produced; the bookkeeping protocol, staked pricing, and the mantra/move split are the second** — even the "centripetal force moved house" diagnosis was itself something BP measured out of the behavior distributions.
 
@@ -129,6 +129,8 @@ Meanwhile the same constitution on different models gives wildly different resul
 - **Claude**: the smartest, one sentence doing the work of three, and the best proof of that conservation law above — the stronger the model, the more it packs the same information into fewer rounds.
 
 There's also a counterintuitive little finding: **higher temperature is actually better** — the model is more flexible, and no extra hallucinations show up. The real trouble is a dim model at low temperature: rigid, parroting, picking fights with everyone, yet especially easy to fool with a stretch of pretty rhetoric (loudest in nitpicking, emptiest in conviction).
+
+All of that is the story without open search, and in that world it ends here: by the DeepSeek V4 generation, every model was roughly as good as the next, and the differences in temperament had been worn away. Once live search was wired in, temperament took one more step: the debate became something like an open-ended problem. What to search, which result to follow, which skill to use and in what order — all of it rests on the model's own ability; the constitution and the manuals can point the way, but they can't walk it for the model. So **brute force wins**: in the sandbox drills (🎯), with the same skills and the same material, Claude Opus 5.5 performed a clear notch better than GPT sol. No amount of detail in the rules makes up for whether the model can find its own way.
 
 ## 📏 The four words "MACD turned negative" don't constitute an argument
 
@@ -230,6 +232,50 @@ From October 2025 to today I've lived through the whole maturation of AI agents:
 
 Today was the second lesson, and it hurt more. While building the English UI and checking, block by block, that every piece of data was covered, I found a serious bug: the stock price is supposed to be represented at three time resolutions — and at some unknown point an AI had broken it, leaving L2 and L3 identical. Which means the most critical tactical window — six months down to two months — had been viewed all along through the blurry long lens of "two or three years to now." **Surgery through a telescope.** I summoned the AI council on the spot and had it rework the quant-data selection end to end. After all this time wondering why the system never quite attains mastery — here's hoping this was the stone pressing down the ceiling.
 
+
+## ⚖️ The hardest role to define: the arbiter's long road
+
+LLMs are born compromisers. Most layered AI research setups I've seen run the same play: collect a few bullish points, collect a few bearish ones — markets are complicated enough that both are always there to be found — and let the AI split the difference by feel. Fence-sitting isn't a flaw of any one model; it's the default output of that structure.
+
+Adversarial debate was my answer to exactly that. Part of the idea was mutual inspiration: your opponent's attack tells you which evidence to go find. The other part was the hope that, in the clash, each side gets partly persuaded and the conclusion converges on its own, leaving the arbiter less to choose.
+
+Yet the hardest member of the cast to define turned out to be the arbiter. Debaters are easy: hand them a side. The arbiter **cannot have a personality**, because personality is itself a contradiction: give it real character and it leans toward one end; ask it to be impartial and it degrades into a mindless damper — the ghost of the old Fulcrum (🌀). A persona that "weighs the bull and the bear case at once" can't be built, not at this stage; if it could, there'd be no need for all these skills and this architecture. That leaves one road: **objective bookkeeping**. It doesn't judge who is right by temperament; it audits the books by the rules. One step further: part of the arbiter's job shouldn't be the arbiter's at all, but belongs to a better debate system — who must concede, which claim is settled, what a settlement is worth, all fixed by rule inside the debate, not improvised at the final ruling (that is the whole line of ledgers and posted prices in 🧾).
+
+But a score is a homemade ruler. Lay out three hundred-odd sessions from v3.2 and v3.3: 100% of composite scores landed between 42 and 59, and 100% of the sessions that acted did so at the lightest size. Wedged between two compliant scores, the arbiter could keep the cleanest books and still compute the middle (as 🧾 put it: averaging isn't laziness, it's arithmetic).
+
+So I had Claude and GPT consult together and replace the ruler outright — that is the big v3.4 update, the **price view** on the verdict page. A debater no longer reports "I'd say 62." It draws a distribution: where the price ends up after 15 trading days, in which bands, with what probability, which levels it passes on the way, where the stop sits. Every claim registers its concrete edit to that distribution, replayed and checked when it is filed. Neither the score nor the size is filled in by anyone any more; both are **computed** from the distribution. The probability-weighted upside against the downside is the composite score. The candidate moves — do nothing, buy now, buy on a condition, trim now, trim on a condition — are each simulated through the same distribution, fills and fees included, and compared with a risk-averse utility; the winner, with its size, is the operation. The arbiter's job shrinks to the minimum: review the ruling sheet, give each side's distribution a weight, and leave the rest to arithmetic. It no longer splits the difference between two numbers — it never touches those numbers at all.
+
+The one regret is that it is complex and abstract. The two of them spent days reading sources, deriving formulas and reviewing each other round after round before it made sense; this piece alone burned a week of my $200 Claude usage. Honestly, I still haven't fully caught up: it feels like exactly what I wanted — "split the difference by feel" taken apart at the level of structure — yet I haven't understood the details of the formulas.
+
+## ⏰ It finally breathes on its own: the duty loop goes live
+
+This picks up where 🫁 left off. About half a year ago, every report gained a closing block of "next review conditions": maybe an event or a point on the event calendar (earnings, a central-bank meeting, a date), maybe a price or an index crossing some threshold. The idea was lovely — each report says for itself when it should be looked at again, and the system wakes up on cue. But IBKR kept dropping its connection and the Codex quota was always thin, so it was only half built: the conditions got written, then lay in the reports with nobody actually watching them.
+
+The next step forward was the semi-smart mode from 🫁: Codex reads the remaining quota and each report's review suggestion and decides for itself which ones to run this round, so I no longer name them one by one — but I still had to pull the trigger myself.
+
+The turn came from the quota. In late October, Tibo, who leads Codex, announced doubled usage limits; after that, Codex kept burning slowly, and when I ran the numbers it looked like, at last, there might be just about enough. On November 4 the automation was written out in full and put on duty. Hermes "breathes" every so often and checks which reports' conditions have come due; if IBKR is up, it pulls the latest prices and checks every trigger line; the moment it finds one that has been hit, it wakes Codex to get to work. The split of power is deliberate: **Hermes only looks, it doesn't judge; Codex decides.** The Codex that wakes up reads the list and the quota, and decides who runs, how many, or whether to defer — writing down why.
+
+Two regrets remain. Hermes is a bit dim: all it can be trusted with is running a script, reading an exit code, and calling someone from a template. And the quota still isn't quite enough to let Hermes command which stock runs directly; the Codex judgment in the middle can't be skipped. The most awkward part: its very first day on duty was November 4, the turbulence around the midterm elections. A whole row of cards on the home page had hit their lines, orange frames lit up everywhere, and the quota covered only a fraction of them. The system had finally learned to wake itself up, only to find the wallet empty.
+
+## 🤝 Too lazy to follow it, so let it follow through for me: delegating orders step by step
+
+It started with a version that later turned out to have a bug: the reports filled up with calls hovering around 50 that nevertheless said buy or sell. With scores hugging the midline, I couldn't be bothered to act on them. But going back through the post-mortems, it had called a lot of those names right — no single trade stood out, yet added up over time it was quite a lot. And I'm watching dozens of tickers, maybe more later; I'm never going to read them all one by one.
+
+So I came up with a plan: IBKR is connected anyway, so let it read my positions, and automate the rebalancing and the order plan too. One premise: **the reports are trusted by default; the only problem is that they go stale** — a report with a wide spread or high volatility can be dead in a day, a big event makes a whole batch need re-evaluating, and a stale report means no action rather than a rushed re-run. Looking at my own trading record turned up something else: with AI help my entries are often very sharp, but once I buy I just hold and almost never rotate. The inertia is mostly on the selling side, and that is the side this mechanism most needs to cover.
+
+The delegation comes in stages, like training a new hire: at first Claude reads the positions and the reports and drafts a rebalancing plan that we settle together; once we've adjusted to each other and it has proven reliable, Claude drafts the plan and I execute it mechanically; after that, Claude places the orders for me on its own.
+
+We're still in stage one, a few days in. Through this sell-off, two of the names bought on its plans are already up and the rest haven't fallen further — no wipeouts so far. The one thing I haven't adjusted to is the AI after v3.4: with the price-view ruler (⚖️) its moves suddenly swing wide — the honest fellow who used to say "around 50, try a light position" has become someone willing to say full size, or sell it all. Delegation rests on mutual adjustment, and now the one who has to adjust is me.
+
+## 🎯 The drill plan: replay it on a sand table and watch which manual it reaches for
+
+One big problem right now: the skills have piled up layer on layer and there are still too many. I once had the AI reorganize them along the layers that had grown naturally (🪴); it felt clean for a while, but the rules keep accreting. Plain BP (🧠) doesn't help much here. BP was only ever a metaphor: there is no real backpropagation formula, just an AI reading post-mortems and abstracting them into lessons that get pushed back layer by layer. But the AI's own attributions tend to be shallow; I have to talk it through, asking point by point "is it because of this?" — and I won't necessarily spot everything either. So the diagnosis is never complete, and for a while it slid into patches stacked on patches: plaster wherever it hurts, and the manuals grow thicker plaster by plaster. It can tell me "this session got it wrong," but hardly "which manuals were at hand, whether it opened one, and which page it read." Put plainly, **BP only fine-tunes the weights; what needs changing is the network architecture itself.**
+
+So, a new method: **the drill** — if BP adjusts the weights, the drill rebuilds the architecture. It is also **the new backtest paradigm for the LLM era**. In formula-driven quant, a backtest meant changing a parameter, rerunning, and reading the statistics — each period is a handful of numbers, so ten thousand periods cost nothing. Here each period is enormous: dozens of turns of argument, dozens of outcalls, a whole book of evidence and ledger, and no statistic can tell you at which step it went wrong. So it runs the other way round: build an isolated sandbox, pick a few typical cases, let it play them out round by round — and afterwards, instead of reading statistics, several AIs and I go through it round by round together. From "run many, read the statistics" to "run few, read deeply."
+
+In practice: pick a few typical trading-state nodes — a breakout, a sharp drop, the eve of earnings, a grinding sideways stretch — and have Claude, GPT and Gemini re-run them in simulation. In each round they play both sides, Zealot and Reaper, and report as they go: which skill would I use right now, why, and how should this be run to get the best result. After a few rounds the books are open: which skills get used a lot, which nobody ever touches, which get used but have flaws to fix, which say the same thing and should be merged and regrouped — and, quite likely, skills in different layers that overlap, or a whole area nobody covers (a dropped rule like 🧩, a lopsidedness like 🧘). Ideally each finding also turns up evidence in past post-mortems: a hole found in the drill that also showed its face in a real loss is no longer just a paper exercise.
+
+The goal is **thin yet complete**. This project and others taught me the same lesson: pile on skills mindlessly and the AI won't read them properly — the thicker the stack, the less likely any page gets read with care. So it has to be designed with care: every area covered, each with the best available material, carrying both an explanation and a professional model as its anchor (the "numbers with their reasons" of 🥋, applied to the whole manual). Not a thicker book — the right one.
 
 Questions and discussion welcome: **sst19910323@gmail.com**
 
@@ -349,7 +395,7 @@ LLM 教会了我金融，我就天真地以为它天然会交易——结果它�
 
 BP 就是神经网络里的**反向传播（Backpropagation）**——我给这套自我改进机制起名"BP 计划",正是借这个比方。
 
-起因很实在：现在报告写得又长又专业，我自己都很难、也没时间一份份细看。那怎么知道它到底行不行、错在哪？答案是**等**——用后验数据。一份报告发出若干天后，市场给出真实答案；让 AI 拿这答案逐份**详细复盘**，再把一堆复盘里反复出现的毛病**抽象成共性问题**，最后把这个"梯度"**反馈**回去，调 prompt、调架构。
+起因很实在：现在报告写得又长又专业，我自己都很难、也没时间一份份细看。那怎么知道它到底行不行、错在哪？传统量化那套"换个参数、把历史重跑一遍、看统计"的回测，在这里用不上：每一期都太大，又接了联网搜索，没法原样重放。答案只能是**等**——用后验数据。一份报告发出若干天后，市场给出真实答案；让 AI 拿这答案逐份**详细复盘**，再把一堆复盘里反复出现的毛病**抽象成共性问题**，最后把这个"梯度"**反馈**回去，调 prompt、调架构。
 
 这不就是反向传播嘛：辩论是前向推理，后验是拿真实标签算误差，复盘是把误差抽象成梯度，改宪法和架构就是更新权重。只不过这里的"梯度"不是数字，是一条被 AI 提炼的抽象教训；"权重"不是矩阵，是那部宪法与这套架构。**拆支点、改贝叶斯是 BP 跑出来的第一批大更新；记账制、挂牌定价、心法与招式分层，是第二批**——连"向心力搬家"这个诊断，都是 BP 自己从行为分布里量出来的。
 
@@ -368,6 +414,8 @@ BP 自己也踩过坑，最阴的一个是：**后验分数会骗人**。有一�
 - **Claude**：最聪明，一句顶人家三句，也最印证开头那条守恒律——能力越强，越是把同样多的信息打包进更少的轮次。
 
 还有个反直觉的小发现：**高温度（temperature）反而更好**——模型更灵活，也没冒出更多幻觉。真正麻烦的是笨模型在低温下：死板、复读、逮谁怼谁，却特别容易被一套漂亮修辞糊弄过去（嘴上最较真，心里最没主见）。
+
+以上都是不开放搜索的版本。在那个世界里，故事就到这了：到了 DeepSeek V4 那一代，各家基本都差不多，脾气的差别被磨平了。接上联网搜索之后，脾气这件事又往前走了一步：辩论变成了某种开放题。搜什么、搜哪条、用哪个 skill、按什么顺序用，全靠模型自己的本事；宪法和秘籍只能指方向，替它走不了路。于是出现了**力大砖飞**：跑沙箱演习（🎯）时，同一套 skill、同一份材料，Claude Opus 5.5 的表现比 GPT sol 好出一截。规则写得再细，也补不上模型自己会不会找路。
 
 ## 📏 "MACD 转负"这四个字，不构成论据
 
@@ -466,6 +514,50 @@ MU 那一期是个标本：它把整条往返路径几乎按数字喊了出来�
 从 2025 年 10 月到今天，我算是亲历了 AI agent 成熟的全过程：最早自己搭架构、跟网页版 AI 一来一回复制粘贴；后来整个工程交给 agent 托管；前几天更进一步——为了避免单个 agent 的思维惯性，Claude 可以当场呼唤 GPT 和 Gemini 开议事会。开发效率前所未有，有时候闲到反反复复打磨一个 UI 够不够酷。可另一面是系统复杂到难以管理：我单独立了个 atlas、在工程里堆了越来越多的文档，就为了数清楚现在到底有多少层、多少条规则、当初为什么这么设计——饶是如此，重要的设计还是会被遗忘（🧩 已经领教过一次）。
 
 今天是第二次领教，而且更疼。给前端做英文版、逐块检查数据有没有翻到位的时候，发现一个大 bug：股价本该用三个时间分辨率分层表征，不知道什么时候被 AI 改坏了——L2 和 L3 成了同一份数据。也就是说，"半年到两个月"这个最关键的战术窗口，AI 一直拿"两三年到现在"的模糊长镜头在看——**拿望远镜做手术**。顺手把 AI 议会喊来，把量化数据的选择整个讨论优化了一遍。研究了半天它为什么迟迟不能神功大成——但愿压住天花板的，就是这块石头。
+
+## ⚖️ 最难定义的那个角色：仲裁者的一路
+
+LLM 天生爱妥协。我见过不少别家的分层 AI 投研，套路大同小异：找几条利好、找几条利空——市场这么复杂，两样总找得到——然后 AI 凭感觉取个中间。和稀泥不是哪个模型的毛病，是这种结构的默认输出。
+
+我选对抗辩论，就是冲着这个去的。一层用意是让两个 AI 互相启发：对手的攻击会告诉你该去找什么证据。另一层是盼着它们在交锋里被部分说服，结论自己收敛，留给仲裁者的选择就少了。
+
+可整套阵容里最难定义的，偏偏是仲裁者。辩手好办，给它一个立场就行；仲裁者**不能有性格人设**，因为性格本身是矛盾的：真有性格，它就会偏向一端；想要"不偏不倚"，又只能退化成一个无脑的阻尼器——那正是当年支点的亡灵（🌀）。一个"同时兼顾利好与利空"的人设，至少现阶段做不出来；真做得出来，也就不用设计这么复杂的 skill 和架构了。剩下的路只有一条：**客观记账**。它不靠性格判断谁对，而是按规则核账。再往下想一步，仲裁者的一部分功能其实根本不该由它来做，而该由更完善的辩论制度决定：谁该让步、哪条主张结清了、结清了值多少，在辩论里就按规则定下来，轮不到终裁时再拍脑袋（🧾 记账、挂牌那条线，说的就是这个）。
+
+可计分制终究是把土尺。v3.2、v3.3 三百来场摊开看：综合分 100% 落在 42–59 之间，出手的场次 100% 是轻档。仲裁者夹在两个合规的分数之间，记账再干净，算出来的还是中间（🧾 里说过，取中不是偷懒，是算术）。
+
+于是让 Claude 和 GPT 一块会诊，把尺子整个换掉——这就是 3.4 的巨更新、裁决页上那张**价格视图**。辩手不再报一个"我觉得 62 分"，而是画一张分布：15 个交易日后价格落在哪几档、各多大概率、路上会碰到哪些价位、在哪止损。每条主张登记的是它对分布的具体改动，入库时回放核账。分数和仓位都不再由谁来填，而是从分布里**算**出来：上行的概率加权幅度对下行之比，就是综合分；几种候选做法（不动、现在买、等条件买、现在减、等条件减）放进同一张分布里模拟成交、扣掉手续费，用一个厌恶风险的效用函数比一比，胜出的那个连同它的仓位，就是最终操作。仲裁者的活于是缩到最小：审裁决单、给两张分布各配一个权重，剩下的交给算术。它终于不用在两个数之间取中了——它根本不碰那两个数。
+
+唯一的缺憾是复杂、抽象。它俩查资料、推公式、一轮轮互审了好几天才研究明白，光这一块就烧掉了我一周 200 美元的 Claude 额度。老实说，我到现在都还没完全跟上：总感觉这就是我要的东西——把"凭感觉取中间"从结构上拆掉——可公式模型的细节还没看懂。
+
+## ⏰ 呼吸终于自己会了：值班循环上岗
+
+接着 🫁 那条往下讲。大概半年前，每一期报告末尾就多了一块"下次复盘条件"：可能是一个事件或事件节点（财报、议息、某个日期），也可能是某个价格、某个指数撞到什么阈值。设想很美——报告自己说清楚什么时候该被重新审一遍，系统到点就自己醒。可当时一边是盈透三天两头掉线，一边是 codex 额度捉襟见肘，这件事只做了一半：条件照写，写完躺在报告里，没有谁真的去盯。
+
+后来往前挪了一步，就是 🫁 里说的半智能模式：codex 先看当前额度和各份报告的复盘建议，自己决定这一轮跑哪些，不用我每次点名——但扳机还得我亲手扣。
+
+转机来自额度。10 月底，Codex 负责人 Tibo 宣布额度翻倍；那之后 codex 依然很耐烧，算了算账，似乎终于够一够了。11 月 4 日，自动化正式写全上岗：Hermes 每隔一阵"呼吸"一次，看看哪些报告的条件到期了；盈透要是没挂，就顺手拉最新价，把每条触发线对一遍；只要找到一个撞线的，就把 codex 喊起来干活。分权是刻意的：**Hermes 只看不判，codex 决定为主**——起来的 codex 看清单、看额度，自己定跑谁、跑几个、还是先推迟，理由一并记下来。
+
+缺憾有两个。一是 Hermes 有点笨，只能让它跑脚本、看退出码、按模板喊人。二是额度还是不太够，没法放心让 Hermes 直接指挥跑哪只票，中间那层 codex 的判断省不掉。最尴尬的是上岗当天就撞上 11 月 4 日中期选举的动荡期：主页上一排卡片撞线到期，橙框亮成一片，额度却只够跑零头。系统终于学会了自己醒，醒来却发现钱包是空的。
+
+## 🤝 懒得跟，就让它替我跟：自动挂单的分级放权
+
+起因是一个后来查明是 bug 的版本：那阵子报告里冒出一大堆 50 分上下、却喊着买或卖的判断。分数贴着中线，我看了就懒得跟。可事后翻复盘，好多标的它其实都踩准了——单拎一笔不起眼，日积月累下来还真不少。再加上我盯着几十个标的，以后可能还会更多，自己根本懒得一份份看。
+
+于是寻思了个计划：盈透反正挂着，顺手让它读我的持仓，把调仓和挂单也做成自动化。前提只有一条：**报告默认高度可信，唯一的问题是时间过期**——价差大、波动大的报告可能一天就作废，碰上大事件一批都得重评，过期的就不动，不为它临时重跑。翻自己的操作记录还发现，在 AI 辅助下我的买点常常很精妙，可买了就拿着不跑，几乎不换仓——惰性主要在卖出那一侧，这套机制最该补的也是那一侧。
+
+放权是分级的，像带新人：起步由 Claude 读持仓和报告、出调仓方案，和我商量着定；互相磨合、确认它靠得住之后，变成 Claude 出方案、我机械执行；再往后，就是 Claude 自动替我挂单。
+
+目前还在第一阶段，跑了几天。赶上这一阵大跌，按方案买进的有两只已经涨了，剩下的也没再跌，可以说没有翻车。唯一没适应的是 3.4 之后的 AI：换了价格视图那把尺（⚖️），它的操作一下子大开大合起来，从前那个"50 分上下、轻仓试探"的老实人，变成了敢说重仓、敢说清仓的家伙。放权的前提是互相适应——现在要适应的那一方，轮到我了。
+
+## 🎯 演习计划：在沙盘上重演一遍，看它伸手拿哪本秘籍
+
+眼下的一大问题是：skill 层层累加，还是太多。之前让 AI 按自然长出来的分层重新整理过一遍（🪴），清爽了一阵，可规则还在一条条往上长。单纯的 BP 计划（🧠）对这件事不太管用了。BP 终究只是个比方：这里没有真正的反向传播公式，误差靠 AI 读复盘、再抽象成教训一层层往回推。可 AI 自己找的归因往往很浅，得我跟它聊、一条条追问"是不是因为这个"——而我也不一定什么都能发现。于是病症总找不全，一度还陷进补丁叠补丁：哪里疼贴哪里，贴着贴着，秘籍就厚了。它能告诉我"这场判错了"，却很难告诉我"它当时手边有哪本秘籍、翻没翻、翻了哪一页"。说穿了，**BP 只是在微调权重；要动的，是网络结构本身。**
+
+于是想了个新办法：**演习**——如果说 BP 是调权重，演习就是改网络结构。它其实也是 LLM 时代**回测的新范式**。从前那套土公式的量化，回测就是换个参数重跑一遍，看统计结果——每一期只有几个数，跑一万期也不费事。现在每一期的内容都特别大：几十轮发言、几十条外呼、一整本证据和账本，靠统计根本看不出它错在哪一步。所以反过来做：搭隔离沙箱，挑一些典型案例，让它一回合一回合地跑；跑完不看统计，而是几个 AI 和我一起逐回合细看。从"跑得多、看统计"，变成了"跑得少、看得深"。
+
+具体做法是挑几个典型的交易状态节点——突破、急跌、财报前夜、横盘磨人那种——拉着 Claude、GPT、Gemini 一起模拟重跑。每个回合由它们分别扮演 Zealot 和 Reaper 两方，边跑边报：此刻我会去用哪个 skill、为什么，怎么跑才能得到尽量好的结果。几轮演下来，账就摊开了：哪些 skill 用得多，哪些从来没人碰，哪些用了但有缺陷要调，哪些说的是同一件事该合并改组；更可能撞见的，是不同层之间的 skill 互相重叠，或者某一块压根没人管（🧩 那种漏掉的规则，🧘 那种偏科）。最好还能在以往的复盘里找到对应的证据——演习里发现的窟窿，要是在真实亏损里也露过脸，就不只是纸上推演了。
+
+最终目的是做到**又薄又全面**。这个项目和别的项目都教过我同一件事：无脑堆 skill，AI 也不会好好看——堆得越厚，每一页被认真读的概率越低。所以得精心设计：每一块都有，每一块都尽量用最好的，既有说明，又有专业模型当锚点（🥋 里说的"数字带理由"，放到整本秘籍上也一样）。不是把书写厚，是把书写对。
 
 ---
 
