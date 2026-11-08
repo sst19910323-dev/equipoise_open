@@ -56,7 +56,7 @@ Doing it for real, I found LLM search is nowhere near "just call an API" — **g
 
 Yet a stronger model only eased the weakness; it never removed it. For a long time I counted on **brute force**: a smarter model to power through it — and on the two debaters sparking each other, the opponent's attack telling you what to go and check. Both worked only so-so. However smart the model, it keeps digging along topics that have already surfaced; a debate can argue one topic through, but rarely argues up a new topic nobody had raised.
 
-The turn came from the drills (🎯). Watching it round by round on the sand table made clear where it actually stalls: not that it can't search, but that it **doesn't know what to search for**. So a mechanism was added: each debater first tries to explain the stock's current move with the information already in hand — how far it rose or fell, and why at this pace; **whatever it can't explain gets raised on its own and sent off to be checked**. This step works surprisingly well: the gap that won't explain is very often exactly where "why it isn't working" is hiding. Getting it to "find the thing it wants to find," it turns out, doesn't mean guessing the hunch — only making it admit where its own account doesn't add up.
+The turn came from the drills (🎯). Re-running debates one by one in their own isolated sandboxes, and watching them round by round, is what first showed a possible way out — not a patch, but a mechanism: each debater must first use the information already in hand to **try to explain, completely**, how the stock is behaving right now. The default assumption is that the news may be incomplete; the moment the explanation doesn't add up, searching becomes the natural next step, and what to search for comes with it. Force the explanation to fit anyway, and the other side knocks the strained account down at a glance. So "finding what it wants to find" stops being a matter of inspiration and becomes something the structure forces out of it.
 
 ## 🛰️ Lateral evidence: from "a make-do reference" to "asking on demand"
 
@@ -345,7 +345,7 @@ LLM 教会了我金融，我就天真地以为它天然会交易——结果它�
 
 可换了更强的模型，这个弱点也只是减轻，没有消失。很长一段时间里，我一直指望**力大砖飞**：靠更聪明的模型硬扛；再指望两位辩手在交锋里互相启发，对手的攻击自然会告诉你该去查什么。效果都一般——模型再聪明，也只会顺着已经浮出水面的话题往下挖；辩论能把一个话题吵透，却很少吵出一个谁都没提的新话题。
 
-转机来自演习（🎯）。在沙盘上一回合一回合地看，才看清它到底卡在哪：不是搜不动，是**不知道该搜什么**。于是加了一个机制：辩手先试着用手头已有的信息，把这只标的眼下的变化解释一遍——涨了多少、跌了多少、为什么是这个节奏；**解释不了的那一块，就单独提出来去查**。这一步出奇地管用：解释不通的缺口，往往就是"为什么不行"藏身的地方。原来要它"发现自己想发现的东西"，不必去猜那个念头，只要逼它承认自己哪里说不通。
+转机来自演习（🎯）。现在这样把一场场辩论放进各自隔离的沙箱里重跑、一回合一回合地看，才第一次看到了可能的解法——它不是一条补丁，而是一个机制：辩手必须先用手头已有的信息，**尝试完美解释**这只标的眼下的市场表现。默认的前提是新闻可能不全；一旦发现解释不通，搜索就成了自然而然的下一步，该查什么也就有了方向。要是硬把它圆过去，那份牵强的解释就会被对面一眼驳掉。于是"去找自己想发现的东西"，从一件靠灵感的事，变成了一件被结构逼出来的事。
 
 ## 🛰️ 横向取证：从"凑合的参照"到"主动去比"
 
