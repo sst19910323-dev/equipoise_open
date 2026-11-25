@@ -144,7 +144,7 @@ The transferable part of this project isn't the code — it's what the work *tau
 Three things this project has outgrown, kept on purpose.
 
 - **The old name.** It started life as *Apex Quant* — a name Gemini suggested when all I could say was "I want to do LLM quant." The mirror was `apex_parliament` (a chamber of AIs arguing their way to a vote), the dashboard *apex dash*, the Claude Code twin *apex codex*. They are all Equipoise now; the story of the rename is in the 🌱 entry of the [design philosophy](docs/design-philosophy.md).
-- **The old address and the return.** The project first lived at [`sst19910323/apex_parliament`](https://github.com/sst19910323/apex_parliament). After that account was compromised in August 2026, development continued at [`sst19910323-dev/equipoise_open`](https://github.com/sst19910323-dev/equipoise_open). The main account has now been recovered; the next step is to rename its original repository to `equipoise_open` and bring the subsequent updates back. Same author, same project history.
+- **The old address and the return.** The project first lived at [`sst19910323/apex_parliament`](https://github.com/sst19910323/apex_parliament). After that account was compromised in August 2026, development continued at [`sst19910323-dev/equipoise_open`](https://github.com/sst19910323-dev/equipoise_open). The main account has now been recovered, the original repository renamed, and the subsequent updates brought back to [`sst19910323/equipoise_open`](https://github.com/sst19910323/equipoise_open). Same author, same project history.
 - **The old paper.** Written in March 2026 about the v1 three-debater parliament, it now reads like a description of a different system. It remains the citable record of where this began:
 
 > **Apex Quant: A Multi-Agent Debate Framework for Quantitative Trading**
@@ -348,7 +348,7 @@ BP = **反向传播**：辩论是前向推理，后验是对真实标签算误�
 三样项目已经长过了头、却特意留下的东西。
 
 - **旧名字。** 它最初叫 *Apex Quant*——当初跟 Gemini 说"要做 LLM 的量化"时它起的名。镜像叫 `apex_parliament`（一屋子 AI 吵架、投票表决的议会），看板叫 *apex dash*，Claude Code 平行版叫 *apex codex*。现在它们都叫 Equipoise；改名的来龙去脉在[设计哲学](docs/design-philosophy.md)的 🌱 一条里。
-- **旧地址与回归。** 项目最早住在 [`sst19910323/apex_parliament`](https://github.com/sst19910323/apex_parliament)。大号在 2026 年 8 月被盗后，项目转到小号的 [`sst19910323-dev/equipoise_open`](https://github.com/sst19910323-dev/equipoise_open) 继续维护。现在大号已经找回，接下来会把大号上的原仓库改名为 `equipoise_open`，并同步这段时间的更新。作者相同，项目历史一脉相承。
+- **旧地址与回归。** 项目最早住在 [`sst19910323/apex_parliament`](https://github.com/sst19910323/apex_parliament)。大号在 2026 年 8 月被盗后，项目转到小号的 [`sst19910323-dev/equipoise_open`](https://github.com/sst19910323-dev/equipoise_open) 继续维护。现在大号已经找回，原仓库已改名为 [`sst19910323/equipoise_open`](https://github.com/sst19910323/equipoise_open)，这段时间的更新也已同步回来。作者相同，项目历史一脉相承。
 - **旧论文。** 2026 年 3 月写的，讲的是 v1 三辩手议会，现在读起来像另一套系统。但它仍是这一切起点的可引用记录：
 
 > **Apex Quant: A Multi-Agent Debate Framework for Quantitative Trading**
