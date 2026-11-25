@@ -21,10 +21,6 @@ A word on the name. The system began life as **Apex Quant** — a name I had Gem
 
 But "Apex" was always a first-week stopgap, and after a year it looked less and less like what this system actually is. On 7 October 2026, together with Fable, I settled the real name: **Equipoise（均势）** — balance under hard contention. Looking back down the road — the adversarial debaters, the damper, the ledger, the staked pricing, the burden-of-proof curve — every mechanism, screwed together, was reaching for that one thing. The moment the name fit felt like the system had finally grown into something worth being named.
 
-## 🗣️ Talking ≠ doing
-
-LLMs taught me finance, so I naively assumed they could trade by nature — instead it carried an analyst's vocabulary while trading like a retail gambler: chasing pumps and dumps, apologizing the instant it got pushed back on. Every piece of architecture that followed is, at bottom, patching the seam between "can talk" and "can do."
-
 ## 🧬 This cast was argued into existence
 
 At first there was just one agent — and it chased pumps and dumps all the same. So I gave it a "heckler," whose only job was to kick it and keep it from drifting — and that's how the debate was born. The two agents gradually split duties: one handled "action" (buy and sell), the other "holding back." Until a failed gold play made it clear: that trader actually **couldn't sell** — call the direction wrong and the best the heckler could do was drag it back to HOLD; the ceiling on error-correction was "just stop."
@@ -50,13 +46,13 @@ The bottom line: **the pivot was a crutch fitted for "a dim model + limited data
 
 ![flowchart](../images/flowchart-v3.png)
 
-## 🔦 Getting an AI to "find the thing it itself wants to find" is surprisingly hard
+## 🔦 Finding information: reposts mislead, and search has troubles of its own
 
-Doing it for real, I found LLM search is nowhere near "just call an API" — **getting an AI to dig along some faint hunch and verify an intuition it hasn't even fully articulated is genuinely hard**. This weakness showed nakedly in the DeepSeek + Linkup API combo: it searched, sure, but never quite on point. GPT and Claude with **native search** did far better. So now both debate and post-mortem are **driven mainly by Codex** — tight as the quota is, that still beats searching off-target. Evidence-gathering itself got an upgrade along the way: what used to be "one round of searching" is now split into **two explicit layers, evidence and task**.
+The first problem was in what got fed in. Back when there were only free news sources, a message lost a layer of credibility each time it changed hands: the president tweets, a wire service quotes it, a data vendor forwards it, and it lands in the dossier. No link lied, yet the source chain evaporated layer by layer; the AI had no way to know the cause and effect, formed its expectations off layer upon layer of reposting, and mistook "verbal pressure" for "policy enacted." Outputs need auditing; the inputs fed in need it more.
 
-Yet a stronger model only eased the weakness; it never removed it. For a long time I counted on **brute force**: a smarter model to power through it — and on the two debaters sparking each other, the opponent's attack telling you what to go and check. Both worked only so-so. However smart the model, it keeps digging along topics that have already surfaced; a debate can argue one topic through, but rarely argues up a new topic nobody had raised.
+That looked like a problem search would surely solve: the AI raises a verification request in the debate itself, and a neutral Scout goes online and pieces the cause and effect together as individual pieces of **evidence**, so the witness who couldn't be reached takes the stand; later, evidence-gathering split into **two explicit layers, evidence and task**. Doing it for real, though, I found search has troubles of its own. LLM search is nowhere near "just call an API" — **getting an AI to dig along some faint hunch and verify an intuition it hasn't even fully articulated is genuinely hard**. This weakness showed nakedly in the DeepSeek + Linkup API combo: it searched, sure, but never quite on point. GPT and Claude with **native search** did far better, so now both debate and post-mortem are **driven mainly by Codex** — tight as the quota is, that still beats searching off-target.
 
-The turn came from the drills (🎯). Re-running debates one by one in their own isolated sandboxes, and watching them round by round, is what first showed a possible way out — not a patch, but a mechanism: each debater must first use the information already in hand to **try to explain, completely**, how the stock is behaving right now. The default assumption is that the news may be incomplete; the moment the explanation doesn't add up, searching becomes the natural next step, and what to search for comes with it. Force the explanation to fit anyway, and the other side knocks the strained account down at a glance. So "finding what it wants to find" stops being a matter of inspiration and becomes something the structure forces out of it.
+Yet a stronger model only eased the weakness; it never removed it. For a long time I counted on **brute force**: a smarter model to power through it — and on the two debaters sparking each other, the opponent's attack telling you what to go and check. Both worked only so-so. However smart the model, it keeps digging along topics that have already surfaced; a debate can argue one topic through, but rarely argues up a new topic nobody had raised.Only the drills, later, showed a first possible way out (🧪).
 
 ## 🛰️ Lateral evidence: from "a make-do reference" to "asking on demand"
 
@@ -73,10 +69,6 @@ So this version I finally committed to building **active lateral evidence** on t
 This thing started as a static LangGraph: mechanical scheduling plus a pile of free keys, capable only of **fixed-frequency polling** — hammering the API when it shouldn't, stuck on cooldown when it should fire; CPI would print and mine still had to wait until tomorrow to fetch it. The data half later got solved cleanly: I built a parallel Claude Code version that proved "let the agent **go search on demand**" actually works — even those normally-hard-to-find European and Japanese fundamentals and news now make it into the debate.
 
 The hard half is rhythm: making it **breathe steadily**. The ideal, fully automatic scheduler — the AIs proposing the next round's timing after they argue, overtime when the market goes extreme — has stayed stuck on two things: **quota** (Codex consumption has been enormous lately; it can no longer sustain even one round a day) and **an IBKR reconnect that needs me physically present**. For a while a Hermes agent served as a "dumb alarm clock," waking Claude Code at fixed times, and automating it produced nothing but instability and permission gremlins. Wait for it to become fully stable? That day wasn't coming. So I settled on a **semi-smart mode**: the trigger is still manual, but the conversational agent first reads the next round's timetable, when the last round finished, the remaining usage and the quota-reset signals, and works out how many debates this run should fire. The root cause, bluntly, is being broke — yet the scheduler that poverty produced is the one that shipped first. Most systems that run smoothly have a stretch behind them, unseen, where they couldn't catch their breath.
-
-## 🧧 Cyber-Boxers: write a good mantra, then summon the patriarch
-
-From the very first version, the whole constitution has been **highly distilled abstract principle — no examples, no specific numbers, no patches for some particular stock in some particular stretch of market**. I call my own approach "Cyber-Boxers" (赛博义和团, after the ritual-chanting Boxers who believed the chants made them invulnerable): don't teach it specific moves, just write a set of mantra-like inner principles, then summon the patriarch to possess it and let the model fight. Sounds mystical; the logic is solid — the moment you start patching, the constitution decays into a list of "mistakes once made," useful only when history repeats; abstract mantras are what transfer: they hold in a bull market, hold in a bear, hold in markets you've never seen.
 
 ## 🔧 Don't beg the model — sculpt the pipeline
 
@@ -136,16 +128,6 @@ There's also a counterintuitive little finding: **higher temperature is actually
 
 All of that is the story without open search, and in that world it ends here: by the DeepSeek V4 generation, every model was roughly as good as the next, and the differences in temperament had been worn away. Once live search was wired in, temperament took one more step: the debate became something like an open-ended problem. What to search, which result to follow, which skill to use and in what order — all of it rests on the model's own ability; the constitution and the manuals can point the way, but they can't walk it for the model. So **brute force wins**: in the sandbox drills (🎯), with the same skills and the same material, Claude Opus 5.5 performed a clear notch better than GPT sol. No amount of detail in the rules makes up for whether the model can find its own way.
 
-## 📏 The four words "MACD turned negative" don't constitute an argument
-
-To become an argument, it must report both **magnitude** (hugging the threshold, or already far from it?) and **direction** (widening, or converging?); a small crossing hugging the line is noise by default. This rule blocks both sides: it blocks the bear's "−1.7, bears confirmed" and the bull's "RSI is only 53, not overbought yet" — an indicator is a measuring scale, not a 0/1 switch.
-
-Looking back, this small rule was the starting point of the whole **quantification road**: bookkeeping, staked pricing, tasks — all of them do the same thing, replacing fuzzy qualitative talk with dependable quantitative computation.
-
-## 🔎 Outputs need auditing; the inputs fed in need it more
-
-Two gates. First, **semantic precision**: the AI is very good at using vague phrasing to make an "inference" sound like it's "quoted straight from data," or at carrying you off with a scaleless word like "clearly on the weak side." Second, **provenance**: a message decays a layer in credibility each time it changes hands — president tweets → wire service quotes → data vendor forwards → into the dossier; no link lied, but the source chain evaporates layer by layer, and in the end the system mistakes "verbal pressure" for "policy enacted." Back when there were only free news sources this pit was deepest: the AI had no way to know the cause and effect, and forming expectations off layer upon layer of reposting bred wrong ones. So now the AI raises a verification request in the debate itself, and a neutral Scout goes online to piece together the cause and effect, filed as individual pieces of **evidence** — turning "a witness who can't be reached" into "one taking the stand," which raises the ceiling on the dossier. (An aside: being misled by news, and "the AI computes odds more coolly than people do," have coexisted all along; but so far the latter wins out — it really does keep its composure better than we do.)
-
 ## 🌀 The centripetal force didn't die — it moved house
 
 Bayesian concession is one of this system's most important principles: when your opponent brings valid new evidence, you must adjust — no stonewalling by sheer stubbornness. The principle never moved. What kept moving is the **trigger** — and it hit a wall at both ends.
@@ -164,17 +146,17 @@ The post-mortem after that (n=161) caught the next culprit: **the final verdict 
 
 The real fix is to shrink its discretion: every pillar of a stance is **staked with a price the moment it's raised — while the outcome is still unknown**. That timing is the whole point: pricing before anyone knows who won kills "I'll decide what that concession was worth after seeing how things went." Settlement is arithmetic — the posted price, not a point more or less — and the verdict's first act is no longer judgment but bookkeeping: assemble the audited ledger; discretion survives only over the genuinely stalemated residue. Along the way, the old "debate intensity" dial was retired outright: how seriously a debate takes itself is now measured by the length and price of its issue docket, not by a self-declared enthusiasm setting.
 
-## 🥋 Mantra and move: two layers, finally pulled apart
+## 🥋 Mantra and anchor: from Cyber-Boxers to numbers with reasons
 
-At the start the model was formless — pure chaos. The first handle I reached for was **mantra** (心法): a set of abstract inner principles, meant to *rouse* it rather than instruct it. It worked — somewhat. But the output was unstable, and the reason is baked into what an LLM is: in the end it's a fill-in-the-next-word game, half-consciously blurting tokens; it can't sit and reason out a complex model on demand, and any single run is a coin toss — a masterpiece one time, a wreck the next.
+The first constitution was **highly distilled abstract principle — no examples, no specific numbers, no patches for some particular stock in some particular stretch of market**. I called the approach "Cyber-Boxers" (赛博义和团, after the ritual-chanting Boxers who believed the chants made them invulnerable): don't teach it moves, just write a mantra (心法), then summon the patriarch to possess it and let the model fight. For the persona layer, that was right: the moment you start patching, the constitution decays into a list of "mistakes once made," useful only when history repeats; abstract mantras are what transfer — they hold in a bull market, in a bear, in markets you've never seen.
 
-The correction was worked out on the most concrete class of knobs: **magnitude expectations** — how many rounds should a debate run? How many days out should a short-term call reach? On these knobs pure abstraction fails quietly: told "as many rounds as it takes," the model re-anchors to its own defaults — closing in three rounds, calling stalemate in round two; and a bare number dies the mirrored way: executed as a hard rule, the reference becomes the target. What works is welding the two together — **a reference magnitude with its design reasoning attached**: not "debates run 5–15 rounds," but "a typical debate runs 5–15 rounds, *because* one issue takes a round or two to argue through and a real docket holds several — so don't count rounds, count unsettled issues." The number hands the model a calibration anchor; the attached reason is its license to depart from the number *correctly* — **an anchor, not a handcuff**; the actual value is its own to set. (This recipe is for the rhythm knobs only: personas and principles stay pure mantra, staked settlement at the other end is pure arithmetic, and "number with reasons" wins exactly in the band between.)
+But mantra alone filled the debates with qualitative talk: "MACD turned negative," "RSI is only 53, not overbought yet," "clearly weakening." Every line looked like an argument, and none of them bound anyone — each side said its piece, both sounded good, and the reader was the one most easily misled. The root is in what an LLM is: in the end a fill-in-the-next-word game, it can't sit down and reason out a complex model on demand, and a performance roused by mantra alone is a coin toss — a masterpiece one time, a wreck the next.
 
-Generalized, the real shape is two layers, and nearly every rule — from the debate as a whole down to the per-round mechanics — needs both: a pure **mantra** (what matters and why, no numbers, transferable across markets) and a concrete **move** (招式: a reference SOP, thresholds, each carrying its reason). The old mistake was mashing the two into one blob — the mantra picks up numbers and rots into a patch-list, while the move loses its reasoning and gets run as a dead rule. So this update **pulls the two layers fully apart**, no longer stepping on each other.
+What came next was quantified a little at a time. It started with indicators: to become an argument, a reading must report both **magnitude** (hugging the threshold, or already far from it) and **direction** (widening, or converging), and a small crossing hugging the line is noise by default — an indicator is a measuring scale, not a 0/1 switch. Then came formulas, thresholds and reference magnitudes, growing all the way into bookkeeping, staked pricing and tasks. It looks like pushing the model toward the mechanical, and it isn't: a bare number dies too, executed as a hard rule, the reference turning into the target. What works is welding the number to its design reasoning — not "debates run 5–15 rounds," but "a typical debate runs 5–15 rounds, *because* one issue takes a round or two to argue through and a real docket holds several — so don't count rounds, count unsettled issues." The number hands the model a calibration anchor; the attached reason is its license to depart from the number *correctly*. **An anchor, not a handcuff.**
 
-This also corrects an earlier verdict of mine: "to a dim model the constitution is a textbook; to a smart one, only procedural law remains." Back then I thought the stronger the model, the more the weight of constraint should shift from "teaching it how to think" to "keeping it from crossing the line." That now looks only half right: a smart model needs the textbook just as much, only in a different form — beyond the principles (the procedural law) it needs SOPs and anchoring references, with the why explained. Without an SOP, and without being steered to summon a subagent, even the smartest LLM can't reliably think its way to a complex model on its own and hand you the result.
+So the real shape of a rule is two layers: a pure **mantra** — what matters and why, no numbers, transferable across markets — and a concrete **move** (招式) — a reference SOP, formulas, thresholds, each carrying its reason. The old mistake was mashing the two into one blob: the mantra picks up numbers and rots into a patch-list, the move loses its reasoning and gets run as a dead rule. Now the two are fully apart: personas and principles stay pure mantra, staked settlement at the other end is pure arithmetic, and anchors with reasons sit in the band between.
 
-(That's the martial-arts sense of the words exactly: 心法 the inner method, 招式 the outward forms.)
+This also corrects an earlier verdict of mine: "to a dim model the constitution is a textbook; to a smart one, only procedural law remains." That now looks only half right: a smart model needs the textbook just as much, in a different form — beyond the principles it needs SOPs and anchoring references, with the why explained. Without an SOP, and without being steered to summon a subagent, even the smartest LLM can't reliably think its way to a complex model on its own and hand you the result. (That's the martial-arts sense of the words exactly: 心法 the inner method, 招式 the outward forms.)
 
 ## 🎫 The debater stops fighting solo — it files a work order
 
@@ -216,7 +198,9 @@ This round I had Claude and Codex in consultation at the same time, tearing the 
 
 World models seem to be walking the same road. When GPT-4 came out, LeCun was already saying language alone isn't enough, that you need a world model — the direction was right, but the real world is far too complex for anyone to draw a complete, correct architecture top-down in one stroke. It's only now — with reasoning, image and video, VLA, robotics and spatial intelligence each breaking through bit by bit, the capabilities assembling piece by piece — that what a complete world model should look like is starting to come into view; Fei-Fei Li's team working on spatial intelligence seems to be moving along that same road. A tiny trading framework and a vast field running into the same regularity is probably not a coincidence.
 
-## 🗜️ It keeps getting better at doing — and is nearly losing the ability to talk
+## 🗣️ Talking and doing: from talking without doing, to doing without talking
+
+LLMs taught me finance, so I naively assumed they could trade by nature — instead it carried an analyst's vocabulary while trading like a retail gambler: chasing pumps and dumps, apologizing the instant it got pushed back on. All of that early architecture was, at bottom, patching the seam between "can talk" and "can do." Patch it long enough, though, and the story flips.
 
 Reading the ancient debate archives — around March, back in the three-debater days — is like reading a different system: wall-to-wall natural language, with mood and qualitative judgment — "I'm worried about valuation," "clearly weakening" — two people having an argument. Then came the long march of quantification: the measuring scale, the ledger, staked pricing, tasks — and today's debate is dense quantitative prose, every sentence carrying an ID, an anchor and a threshold. Rigorous, genuinely; and genuinely exhausting to read — never mind the body, even the summary has to be decoded word by word. The road from fuzzy talk to dependable computation wasn't the wrong road; it's just that at the end of it I found I had swapped out "a human can read it" along the way.
 
@@ -281,6 +265,16 @@ In practice: pick a few typical trading-state nodes — a breakout, a sharp drop
 
 The goal is **thin yet complete**. This project and others taught me the same lesson: pile on skills mindlessly and the AI won't read them properly — the thicker the stack, the less likely any page gets read with care. So it has to be designed with care: every area covered, each with the best available material, carrying both an explanation and a professional model as its anchor (the "numbers with their reasons" of 🥋, applied to the whole manual). Not a thicker book — the right one.
 
+## 🧪 The first drill: pull one thread and the whole cloth moves
+
+The drill plan had barely landed when its first run proved both its power and its price. The case was GENERAL on October 9 — the start of a slow, grinding US decline — re-run on the current sol. Replayed as it originally stood, round one came out Zealot 56, Reaper 53: neither side was really bearish.
+
+This drill changed just one thing, in round one, exactly where the information entry (🔦) had always been stuck: each debater must first use the information already in hand to **try to explain, completely**, how the market is behaving right now. The default assumption is that the news may be incomplete; the moment the explanation doesn't add up, searching becomes the natural next step, and what to search for comes with it. Force the explanation to fit anyway, and the other side knocks the strained account down at a glance. So "finding what it wants to find" stops being a matter of inspiration and becomes something the structure forces out of it.
+
+The effect was immediate: round one became 53 to 39, and Reaper had the direction right at once. Then in round two Reaper promptly caved back to 53, and by round three it had charged to 61 — more aggressive than Zealot's 60, with QQQ at 71 across the three lenses. Fifteen days later the tape read SPY −0.9%, QQQ −4.7%, DIA +1.8%: the bearish call had been the right one. One change in round one, and every round after it bent out of shape — something was clearly turned up too hard: from right to overcorrected in two rounds.
+
+That is exactly what the drill is for. Read as a statistic, this run is just "changed it, didn't get better," dismissed in one number; read round by round, you can see the good step really did happen in round one and the bad one came later. So the work has gone back to round one, to understand that single fix thoroughly before moving on. The broken bones were expected — the drill rebuilds the architecture; it doesn't tune the weights.
+
 Questions and discussion welcome: **sst19910323@gmail.com**
 
 ---
@@ -310,10 +304,6 @@ Questions and discussion welcome: **sst19910323@gmail.com**
 
 可"Apex"终究是起步时的凑合，叫了一年，越看越不像这套系统真正的样子。2026 年 10 月 7 日，和 Fable 一起把正式名字定了下来：**Equipoise（均势）**——激烈交锋之下的均衡。回头看这一路：辩手对抗、阻尼器、记账、挂牌、举证曲线……所有机制拧在一起，求的其实就是这一件事。名字到位的那一刻，倒像是系统终于长到了配得上它的样子。
 
-## 🗣️ 会说 ≠ 会做
-
-LLM 教会了我金融，我就天真地以为它天然会交易——结果它顶着分析师的词汇量，做着韭菜的操作：追涨杀跌，被怼一句立刻道歉认错。后面所有架构，本质都是在补"会说"和"会做"之间那道缝。
-
 ## 🧬 这套阵容，是一路吵出来的
 
 最早只有一个 agent，照样追涨杀跌。于是我给它配了个"找茬的"，专门踹它一脚、别让它晃——辩论就这么诞生了。两个 agent 慢慢分了工：一个负责"动"（买和卖），一个负责"拉住"。直到一次失败的黄金策略让我看清：那个交易员其实**不会卖**，方向喊错了也只能被找茬的拉回 HOLD，纠错的天花板就是"别动了"。
@@ -339,13 +329,13 @@ LLM 教会了我金融，我就天真地以为它天然会交易——结果它�
 
 ![流程](../images/flowchart-v3.png)
 
-## 🔦 让 AI"搜到它自己想发现的东西"，出奇地难
+## 🔦 找信息：转载会骗人，搜索也有搜索的难
 
-做下来才发现，LLM 搜索远不是"调个 API"那么简单——想引导 AI 顺着某个隐隐的念头去挖、去印证它自己都还没说清的直觉，特别难。这个弱点在 DeepSeek + Linkup API 这套组合上暴露得淋漓尽致：它搜是搜了，却总搜不到点子上。相比之下，GPT、Claude 配**原生搜索**表现好得多。所以现在辩论和复盘都换成了 **codex 主力驱动**——哪怕额度紧，也比搜不到点子上强。取证这件事本身也升了级：从早年的"一把搜索"，分成了 **evidence 和 task 两个明确的层面**。
+最早的问题出在喂进去的东西上。只有免费新闻源的那段日子，一条消息每转一手，可信度就衰减一层：总统发条推，通讯社引用，数据商转发，最后进了卷宗。每一环都没撒谎，来源链却层层蒸发；AI 不知道前因后果，照着层层转载就形成了错误预期，把"口头施压"当成了"政策落地"。输出要审计，喂进去的输入更要审计。
 
-可换了更强的模型，这个弱点也只是减轻，没有消失。很长一段时间里，我一直指望**力大砖飞**：靠更聪明的模型硬扛；再指望两位辩手在交锋里互相启发，对手的攻击自然会告诉你该去查什么。效果都一般——模型再聪明，也只会顺着已经浮出水面的话题往下挖；辩论能把一个话题吵透，却很少吵出一个谁都没提的新话题。
+这个问题看上去搜索肯定能解决：辩论里 AI 自己提出查证需求，由中立的 Scout 取证员联网去搜，把前因后果归纳成一条条 **evidence**，让传不到的证人当场出庭；后来取证又分成了 **evidence 和 task 两个明确的层面**。可做下来才发现，搜索有搜索的难处。LLM 搜索远不是"调个 API"那么简单——想引导 AI 顺着某个隐隐的念头去挖、去印证它自己都还没说清的直觉，特别难。这个弱点在 DeepSeek + Linkup API 这套组合上暴露得淋漓尽致：它搜是搜了，却总搜不到点子上。GPT、Claude 配**原生搜索**表现好得多，所以现在辩论和复盘都换成了 **codex 主力驱动**——哪怕额度紧，也比搜不到点子上强。
 
-转机来自演习（🎯）。现在这样把一场场辩论放进各自隔离的沙箱里重跑、一回合一回合地看，才第一次看到了可能的解法——它不是一条补丁，而是一个机制：辩手必须先用手头已有的信息，**尝试完美解释**这只标的眼下的市场表现。默认的前提是新闻可能不全；一旦发现解释不通，搜索就成了自然而然的下一步，该查什么也就有了方向。要是硬把它圆过去，那份牵强的解释就会被对面一眼驳掉。于是"去找自己想发现的东西"，从一件靠灵感的事，变成了一件被结构逼出来的事。
+可换了更强的模型，这个弱点也只是减轻，没有消失。很长一段时间里，我一直指望**力大砖飞**：靠更聪明的模型硬扛；再指望两位辩手在交锋里互相启发，对手的攻击自然会告诉你该去查什么。效果都一般——模型再聪明，也只会顺着已经浮出水面的话题往下挖；辩论能把一个话题吵透，却很少吵出一个谁都没提的新话题。直到后来的演习，才第一次看到可能的解法（🧪）。
 
 ## 🛰️ 横向取证：从"凑合的参照"到"主动去比"
 
@@ -362,10 +352,6 @@ LLM 教会了我金融，我就天真地以为它天然会交易——结果它�
 这套东西最早是静态的 LangGraph：机械调度 + 一堆免费 key，只能**固定频率轮询**——不该请求时频繁打，该请求时却在 CD，CPI 都公布了，我的还得等明天才取。数据这半边后来解决得很干净：搭了个平行的 Claude Code 版本，验证"让 agent **按需自己去搜**"行得通，连欧洲、日本那些平时难找的基本面和新闻都能喂进辩论了。
 
 难的是节奏这半边：怎么让它**稳定地"呼吸"**。理想的全自动调度——AI 吵完自己建议下一轮时间、极端行情临时加班——一直卡在两件事上：**额度**（这一阵 codex 消耗巨大，已经撑不起一天一轮），和**盈透重连需要我在场**。中间拿 hermes agent 当过"笨闹钟"，按固定点喊 Claude Code 干活，自动化起来净闹稳定性和权限的幺蛾子。等它完全稳定？等不到。于是折中出一个**半智能模式**：驱动还是手动的，但对话 agent 会先看下一轮时间表、上一轮跑完的时间、剩余 usage 和额度重置信号，替我算出这一次该跑几场。说白了根源是穷——可穷出来的这台调度器，反而先落地了。能稳定运转的系统，背后大多有一段没人看见的"喘不上气"。
-
-## 🧧 赛博义和团：写好心法，请祖师爷上身
-
-从第一版起，整部宪法就是**高度凝练的抽象原则——不举例子、不写具体数字、不给某只票某段行情打补丁**。我自己管这套打法叫"赛博义和团"：不教它具体招式，只写一套心法口诀，然后请祖师爷上身、让模型附体去打。听着玄，道理却很实在——一旦开始打补丁，宪法就退化成一张"曾经犯过的错"清单，只在历史重演时才管用；抽象口诀才迁移得动：牛市成立、熊市成立、没见过的行情也成立。
 
 ## 🔧 别恳求模型，雕琢管线
 
@@ -425,16 +411,6 @@ BP 自己也踩过坑，最阴的一个是：**后验分数会骗人**。有一�
 
 以上都是不开放搜索的版本。在那个世界里，故事就到这了：到了 DeepSeek V4 那一代，各家基本都差不多，脾气的差别被磨平了。接上联网搜索之后，脾气这件事又往前走了一步：辩论变成了某种开放题。搜什么、搜哪条、用哪个 skill、按什么顺序用，全靠模型自己的本事；宪法和秘籍只能指方向，替它走不了路。于是出现了**力大砖飞**：跑沙箱演习（🎯）时，同一套 skill、同一份材料，Claude Opus 5.5 的表现比 GPT sol 好出一截。规则写得再细，也补不上模型自己会不会找路。
 
-## 📏 "MACD 转负"这四个字，不构成论据
-
-要让它成为论据，必须同时报出**幅度**（贴着临界线，还是已经远离？）和**方向**（在扩大，还是在收敛？）；贴着线的小幅穿越，默认就是噪音。这条规则两边都拦：既拦空头的"-1.7，空头确立了"，也拦多头的"RSI 才 53，还没超买呢"——指标是一把刻度尺，不是一个 0/1 开关。
-
-回头看，这条小规则其实是整条**计量化路线的起点**：后来的记账、挂牌定价、task，干的都是同一件事——把模糊的定性话术，换成可靠的量化计算。
-
-## 🔎 输出要审计，喂进去的输入更要审计
-
-两道关。一是**语义精确**：AI 很会用含混语气把一个"推断"说得像"直接引自数据"，或只给"明显偏弱"这种没刻度的词把你带走。二是**消息溯源**：一条消息每转一手，可信度就衰减一层——总统发条推 → 通讯社引用 → 数据商转发 → 进了卷宗，每环都没撒谎，但来源链层层蒸发，最后系统就把"口头施压"当成了"政策落地"。早期只有免费新闻源时这坑最深：AI 没法知道前因后果，照着层层转载就形成了错误预期。所以现在辩论里 AI 会自己提出查证需求，由中立的 Scout 取证员联网搜索、归纳前因后果，落成一条条 **evidence**——把"传不到的证人"变成"当场出庭"，卷宗的上限就被抬高了。（题外一句：被消息误导、和"AI 算赔率比人冷静"这两层一直并存；但目前看是后者占上风——它确实比我们沉得住气。）
-
 ## 🌀 向心力没死，它搬了家
 
 贝叶斯退让是这套系统最重要的原则之一：对手拿出有效新证据，你就得调立场，不许纯靠嘴硬扛。原则没动过，动的一直是**触发条件**——而且两头都撞过墙。
@@ -453,17 +429,17 @@ BP 自己也踩过坑，最阴的一个是：**后验分数会骗人**。有一�
 
 真正的修法是缩小它的量裁区：每根立场支柱在立起来的那一刻就要**挂牌标价——趁着输赢还未知的时候**。这个时点就是全部要义：在不知道谁赢之前定价，杀死了"等看清风向再决定这次退让值几分"的自说自话。结算是算术——按挂的牌价，一分不多一分不少；终裁的第一步不再是裁量而是记账：把经过审计的账本组装起来，量裁权只保留给真正僵持的残余。顺带，"辩论烈度"这个旋钮整个退役了——一场辩论有多认真，如今看它议题清单的长度和牌价，不看它自报的热情值。
 
-## 🥋 心法与招式：终于把两层彻底分开
+## 🥋 心法与锚点：从赛博义和团到带理由的数字
 
-一开始，模型是混沌一片。我伸手去够的第一个把手是**心法**：一套抽象的内功原则，想的是*激发*它、而不是命令它。有效——但只有几分。它的发挥很不稳定，根子就在 LLM 的本性里：它终究是个填词游戏，半下意识地往外蹦字，没法当场坐下来推演一个复杂模型，任何一次单独发挥都像抛硬币——这次神作、下次翻车。
+最早的宪法是一套**高度凝练的抽象原则——不举例子、不写具体数字、不给某只票某段行情打补丁**。我管这套打法叫"赛博义和团"：不教招式，只写心法口诀，然后请祖师爷上身、让模型附体去打。人设这一层它是对的：一旦开始打补丁，宪法就退化成一张"曾经犯过的错"清单，只在历史重演时才管用；抽象口诀才迁移得动，牛市成立、熊市成立、没见过的行情也成立。
 
-纠偏是从最具体的一类旋钮上摸出门道的：**量级预期**——一场辩论该打几轮？一个短线判断该往前看几天？在这类旋钮上纯抽象会悄悄失效：告诉它"该几轮就几轮"，它就锚回自己的默认值，三轮收场、第二轮就宣布僵持；而光秃秃的数字死在镜像的另一边：被当成硬规则机械执行，参考值变成目标值。管用的是把两样焊在一起——**一个参考量级，附带它的设计推理**：不说"辩论跑 5–15 轮"，而说"典型一局 5–15 轮，*因为*一个议题谈透要一两轮、一张像样的清单上总有好几个议题——所以别数轮数，数还没结清的议题"。数字给模型一个校准锚点，附带的理由则是它"正确地偏离数字"的许可证——**是锚，不是铐**，具体的值它自己来定。（这个配方只用在节奏类旋钮上：人设与原则依然是纯心法，挂牌结算那头是纯算术，"数字带理由"恰好是中间取胜的那段。）
+可光有心法，辩论里就满是定性说法："MACD 转负了"、"RSI 才 53，还没超买"、"明显转弱"。每句都像论据，其实谁也约束不了谁——你说你的，他说他的，两边各自漂亮，读的人反而最容易被带偏。根子在 LLM 的本性里：它终究是个填词游戏，没法当场坐下来推演一个复杂模型，单凭心法激发出来的发挥像抛硬币，这次神作、下次翻车。
 
-推而广之，真正的形状是两层，几乎每条规则——从整场辩论到每一轮的机制——都同时需要：一层纯**心法**（讲什么重要、为什么，不带数字，能跨市场迁移），一层具体**招式**（参考 SOP、阈值，每个都带着它的理由）。过去的毛病是把两样揉成一坨——心法沾上数字、退化成补丁清单，招式丢了道理、被当成死规则机械执行。所以这次更新，**把两层彻底分开**，不再互相踩脚。
+后来是一点点量化出来的。先从指标开始：一个读数要成为论据，必须同时报出**幅度**（贴着临界线，还是已经远离）和**方向**（在扩大，还是在收敛），贴着线的小幅穿越默认就是噪音——指标是一把刻度尺，不是 0/1 开关。再往后是公式、阈值、参考量级，一路长到记账、挂牌定价和 task。这看起来像把模型往机械里推，其实不是：光秃秃的数字一样会死，被当成硬规则执行，参考值变成目标值。管用的是把数字和它的设计推理焊在一起——不说"辩论跑 5–15 轮"，而说"典型一局 5–15 轮，*因为*一个议题谈透要一两轮、一张像样的清单上总有好几个议题，所以别数轮数，数还没结清的议题"。数字给模型一个校准锚点，附带的理由是它"正确地偏离数字"的许可证。**是锚，不是铐。**
 
-这顺带修正了我早先的一个判断："宪法对笨模型是教科书，对聪明模型只剩程序法。"当时觉得模型越强，约束的重心就越该从"教它怎么想"移到"管它别越界"。现在看只对了一半：聪明模型一样需要教科书，只是形态变了——原则（程序法）之外，还得有 SOP 和锚定参照、并解释清楚为什么。你不给 SOP、不引导它去召唤 subagent，再聪明的 LLM 也没法稳定地自行寻思出一个复杂模型、再把结果端给你。
+所以规则真正的形状是两层：一层纯**心法**，讲什么重要、为什么，不带数字，能跨市场迁移；一层具体**招式**，参考 SOP、公式和阈值，每个都带着它的理由。过去的毛病是把两样揉成一坨——心法沾上数字、退化成补丁清单，招式丢了道理、被当成死规则机械执行。现在两层彻底分开：人设与原则依然是纯心法，挂牌结算那头是纯算术，带理由的锚点卡在中间。
 
-（这正是两个词的武学本义：心法是内功心诀，招式是外在招法。）
+这也修正了我早先的一个判断："宪法对笨模型是教科书，对聪明模型只剩程序法。"现在看只对了一半：聪明模型一样需要教科书，只是形态变了——原则之外，还得有 SOP 和锚定参照，并讲清楚为什么。不给 SOP、不引导它去召唤 subagent，再聪明的 LLM 也没法稳定地自行寻思出一个复杂模型、再把结果端给你。（心法是内功心诀，招式是外在招法，这正是两个词的武学本义。）
 
 ## 🎫 辩手不再单打独斗——它开一张工作单
 
@@ -505,7 +481,9 @@ MU 那一期是个标本：它把整条往返路径几乎按数字喊了出来�
 
 世界模型好像也在走同一条路。GPT-4 刚出来时 LeCun 就说光靠语言不够、必须有世界模型——方向没错，可真实世界复杂到不可能靠顶层设计一步拍出完整正确的架构。反而是现在：推理、图像视频、VLA、机器人、空间智能各自一点点突破，能力一块块拼起来之后，一个完整的世界模型该长什么样才开始看得清——李飞飞团队做 spatial intelligence，感觉也是沿着这条路在往前走。一个小小的交易框架和一个大领域撞上同一条规律，大概不是巧合。
 
-## 🗜️ 它越来越会做，却快不会说了
+## 🗣️ 会说与会做：从会说不会做，到会做不会说
+
+LLM 教会了我金融，我就天真地以为它天然会交易——结果它顶着分析师的词汇量，做着韭菜的操作：追涨杀跌，被怼一句立刻道歉认错。最早的那一整套架构，本质都是在补"会说"和"会做"之间那道缝。补着补着，故事掉了个头。
 
 翻上古版本的辩论存档——三月前后、还是三元阵容那会儿——像在读另一个系统：满篇自然语言，带情绪、带定性，"我担心估值"、"明显转弱"，活脱两个人在吵架。后来一路计量化：刻度尺、记账、挂牌、task，到今天的辩论已经是高密度定量——句句带编号、锚点和阈值，严谨是真严谨，可读着也是真累：别说正文，连 summary 都得逐字解码。把模糊话术换成可靠计算的那条路没有走错，只是走到头才发现，顺手把"人能读"也换掉了。
 
@@ -566,6 +544,16 @@ LLM 天生爱妥协。我见过不少别家的分层 AI 投研，套路大同小
 具体做法是挑几个典型的交易状态节点——突破、急跌、财报前夜、横盘磨人那种——拉着 Claude、GPT、Gemini 一起模拟重跑。每个回合由它们分别扮演 Zealot 和 Reaper 两方，边跑边报：此刻我会去用哪个 skill、为什么，怎么跑才能得到尽量好的结果。几轮演下来，账就摊开了：哪些 skill 用得多，哪些从来没人碰，哪些用了但有缺陷要调，哪些说的是同一件事该合并改组；更可能撞见的，是不同层之间的 skill 互相重叠，或者某一块压根没人管（🧩 那种漏掉的规则，🧘 那种偏科）。最好还能在以往的复盘里找到对应的证据——演习里发现的窟窿，要是在真实亏损里也露过脸，就不只是纸上推演了。
 
 最终目的是做到**又薄又全面**。这个项目和别的项目都教过我同一件事：无脑堆 skill，AI 也不会好好看——堆得越厚，每一页被认真读的概率越低。所以得精心设计：每一块都有，每一块都尽量用最好的，既有说明，又有专业模型当锚点（🥋 里说的"数字带理由"，放到整本秘籍上也一样）。不是把书写厚，是把书写对。
+
+## 🧪 第一期演习：牵一发而动全身
+
+演习计划一落地，第一期就同时印证了它的效力和它的代价。复盘的是 10 月 9 日的 GENERAL，美股阴跌的起点，用的是现在的 sol。原样重跑一遍，第一回合是 Zealot 56、Reaper 53，两边都没怎么看空。
+
+这一期只在第一回合改了一件事，正是找信息那条（🔦）里一直卡住的地方：辩手必须先用手头已有的信息，**尝试完美解释**这只标的眼下的市场表现。默认的前提是新闻可能不全；一旦发现解释不通，搜索就成了自然而然的下一步，该查什么也就有了方向。要是硬把它圆过去，那份牵强的解释就会被对面一眼驳掉。于是"去找自己想发现的东西"，从一件靠灵感的事，变成了一件被结构逼出来的事。
+
+效果立竿见影：第一回合变成 53 比 39，Reaper 一下子看对了方向。可第二回合 Reaper 迅速滑跪回 53，到第三回合干脆冲到 61，比 Zealot 的 60 还激进，三个镜头里 QQQ 给到了 71。而 15 天后的实际是 SPY −0.9%、QQQ −4.7%、DIA +1.8%，看空本来是对的。第一回合只动了一处，后面每一回合都跟着变了形，显然有哪里改猛了：从看对到矫枉过正，只隔了两个回合。
+
+这恰恰是演习的意义。要是只看统计，这一期就是"改了，没变好"，一个数字就打发了；逐回合看下来，才看得清好的那一步确实发生在第一回合，坏的那一步发生在后面。所以现在退回到第一回合，先把这一处修复本身研究透，再往下走。伤筋动骨在意料之中——演习本来就是在改网络结构，不是在调权重。
 
 ---
 
