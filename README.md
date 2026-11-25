@@ -121,6 +121,14 @@ All state now lives in **PostgreSQL** — technicals, news, reports, economic in
 
 ---
 
+## 🛠️ Getting started: let an agent handle init
+
+The intended entry point for the upcoming code release is simple: **open the project in Codex or Claude Code and ask it to initialize the environment**. We are still organizing the setup instructions and scripts: database initialization, Hermes setup where needed, and the paths, configuration and entry instructions each Codex / Claude instance needs to find its way. A complete public initialization flow is not available yet; the runnable reference in this repository remains v1.
+
+> This thing has become so complicated that even I need an agent to organize it, initialize it, and keep it in sync.
+
+---
+
 ## 🧭 Design philosophy
 
 The transferable part of this project isn't the code — it's what the work *taught* me about making an LLM that *talks* finance actually *do* finance. That's written up as an evolving, bilingual retrospective:
@@ -314,6 +322,14 @@ BP = **反向传播**：辩论是前向推理，后验是对真实标签算误�
 **一套 prompt，两个引擎。** "辩论 + 后验"的逻辑只有一层内容 —— 宪法、playbook、输出格式、skill —— 由 **Claude Code** runner 和 **GPT Codex** runner 逐字共用，两边只差一层薄薄的驱动壳。（早先的 **API 版** —— agent 用 DeepSeek、搜索用 Linkup 或 Gemini grounding —— 已退役进博物馆：实践下来 AI 到底还是讲究"力大砖飞"，我自己搭的搜索比 Claude / GPT 的**原生搜索**差很多。）眼下 **GPT Codex 版是主力**（用一个 200 刀/月的套餐驱动），Claude Code 版次之。模型按角色分档：裁判三角色（仲裁者、Zealot、Reaper）用中高档，Scout 与 Runner 用小模型 —— 任何偏离都要人明确特批，引擎永不自主换档。而且不只是取数靠 agent 搜索，**核心的辩论与后验本身也跑在 agent 上**。
 
 **agent 原生的"部署"。** 不再是 `git clone && 部署`：而是**把仓库交给 Claude Code 或 GPT Codex，让它自己把一切装好**。编排也交给 agent，只是节奏眼下还是半自动的。一个 **Hermes** 心跳 agent 当过一阵"笨闹钟"，但额度、加上盈透重连需要我本人在场，让全自动始终够不着。所以驱动是手动的，由对话 agent 先看时间表、上一轮跑完的时间和剩余额度，算出这次该跑几场。然后批处理 runner 分波次开火（先各区域大盘、再 ETF、再个股 —— 父子场之间不再有依赖，可以并发）；辩论 / 后验的 skill 还能从服务器自拷到一台新机器。因为一场辩论住在文件里、而不在某一个上下文窗口里，一棒没跑完就停、但账本 buffer 有前进的场次，会由新进程从最后一条记录接着跑（**接力续跑**），外面还有逐场的活性看门狗。每份终报都盖着真正产出它的模型与 harness 的签章。这一版从设计上就重度依赖 agent，这也是它不像 v1 那样开箱即用的原因。
+
+---
+
+## 🛠️ 怎么开始：让 agent 来 init
+
+后续代码开源的入口就准备做成一句话：**用 Codex 或 Claude Code 打开项目，让它带着你初始化环境。** 目前还在整理初始化说明和脚本：数据库怎么建、需要时 Hermes 怎么装，以及各个 Codex / Claude 实例该去哪里找路径、配置和启动指引。完整的公开初始化流程尚未就绪；当前仓库里可运行的参考代码仍是 v1。
+
+> 这玩意已经复杂到，连我自己整理、初始化、同步，都得请 agent 帮忙了。
 
 ---
 
